@@ -30,6 +30,8 @@ int main(){
         cout << endl;
         arr.at(i) = subArr;                                 //temporary subarray is appended to the outer vector
     }
+
+    arr.clear();
     
     return 0;
 }
