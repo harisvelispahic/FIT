@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 #include <ctime>
 using namespace std;
 
@@ -6,7 +7,7 @@ void output(char[3][3]);
 
 int main() {
 	srand(time(NULL));
-	int play;
+	char play = 0;
 
 	do {
 
@@ -39,14 +40,21 @@ int main() {
 				switchChars = true;
 
 				int xCord, yCord, number;
+				char numberChar;
+
 				cout << "Current player is: " << "\033[1;34m" << playingChar << "\033[0m" << endl;
 
 				cout << "Enter the number where you want to place your char: ";
-				do {
-					cin >> number;
-					if (number < 1 || number > 9)
-						cout << "Number out of range. Please enter a number between 1 and 9: ";
 
+				do {
+					//cin >> number;
+					numberChar = _getch();													//non blocking input
+					number = numberChar - '0';
+					if (number < 1 || number > 9) {
+						cout << "Invalid input. Please enter a number between 1 and 9: ";
+						/*cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');*/
+					}
 				} while (number < 1 || number > 9);
 
 				switch (number) {
@@ -83,6 +91,8 @@ int main() {
 					cout << "Illegal move! Please enter again: " << endl;
 					j--;
 					switchChars = false;
+					system("pause");
+					
 				}
 				else
 					field[xCord][yCord] = playingChar;
@@ -116,6 +126,7 @@ int main() {
 					gameOver = true;
 				}
 
+				system("cls");
 				output(field);
 
 
@@ -131,7 +142,6 @@ int main() {
 					else
 						playingChar = 'X';
 				}
-
 			}
 		}
 		if (gameOver == false)
@@ -141,11 +151,15 @@ int main() {
 
 		// end of main code
 
-		cout << "To play the game again, enter a number (number = -1 --> exit): ";
-		cin >> play;
+		cout << "To play the game again, enter a number (number = 'l' --> exit): ";
+		/*cin >> play;*/
+		play = _getch();
 		cout << endl;
+		system("cls");
 
-	} while (play != -1);
+		
+
+	} while (play != 'l');
 	cout << "Thank You for playing!" << endl;
 	cout << endl;
 	system("pause");
