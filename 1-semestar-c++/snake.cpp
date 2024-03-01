@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <conio.h>
 #include <chrono>
 #include <thread>
@@ -70,9 +70,12 @@ int main() {
 	while (rewardsAvailable) {											// spawning rewards
 		int xRewardCoord = spawnRewardX(), yRewardCoord = spawnRewardY();
 		for (int i = moveCounter - snakeLength; i < snakeLength; i++) {	// reward should not spawn inside the snake
-			if (xRewardCoord == xRemember[i] && yRewardCoord == yRemember[i]) {
-				continue;
+			for (int j = moveCounter - snakeLength; j < snakeLength; j++) {
+				if (xRewardArr[i] == xRemember[j] && yRewardArr[i] == yRemember[j]) {
+					continue;
+				}
 			}
+			
 		}
 		field[xRewardCoord][yRewardCoord] = reward;
 		xRewardArr[snakeLength - 1] = xRewardCoord;
@@ -176,17 +179,17 @@ void constructMatrix(char matrix[][MATRIX_SIZE_Y]) {
 void printMatrix(char matrix[MATRIX_SIZE_X][MATRIX_SIZE_X*2]) {
 	for (int i = 0; i < MATRIX_SIZE_X; i++) {
 		for (int j = 0; j < MATRIX_SIZE_X*2; j++) {
-			/*if (matrix[i][j] == reward) {
-				cout << "\033[1;31m" << reward << "\033[0m";			// colours dont work propperly on .exe run
+			if (matrix[i][j] == reward) {
+				cout << reward;
 			}
 			else if (matrix[i][j] == playingChar) {
-				cout << "\033[1;32m" << playingChar << "\033[0m";
+				cout << playingChar;
 			}
 			else {
 				cout << matrix[i][j];
-			}*/
+			}
 
-			cout << matrix[i][j];
+			/*cout << matrix[i][j];*/
 		}
 		cout << endl;
 	}
