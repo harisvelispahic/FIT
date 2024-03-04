@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+<style>
+
+html{
+  height: 100%;
+}
+
+body{
+  height: 100%;
+  background-color: cornflowerblue;
+}
+
+#mainForm{
+  border-radius: 50px;
+  border: 2px solid black;
+  background-color: silver;
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 500px;
+}
+
+#form{
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#logo{
+  text-align: center;
+  font-style: italic;
+  text-transform: uppercase;
+  color:rgb(69, 150, 255);
+  font-size: 20px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding-bottom: 50px;
+}
+
+img{
+  display: block;
+  width: 300px;
+}
+
+button{
+  margin-left: 50%;
+  margin-top: 20px;
+}
+
+label{
+  color: darkblue;
+}
+
+
+</style>
+
+</head>
+
+<!-- 
+
+  -Podesiti visinu html taga na 100%
+-Podesiti visinu body-ja na 100% i pozadinsku boju na cornflowerblue
+-#mainForm za okrugli border : border-radius:50px
+-#logo centrirati tekst i transformisati tekst u uppercase, tekst je italic
+-Promijeniti defaultno ponašanje img taga sa inline displaya na block
+-#form širina 200px
+-button hint: "margin-left 50%" 
+
+-->
+
+
+<body>
+    <div id="mainForm">
+    <img src="logo.png"/>
+    <div id="logo">Dobrodosli na nasu stranicu</div>
+    <div id="form">
+            <div >
+                <label >Korisnicko ime</label>
+                <input>
+            </div>
+          <div >
+            <label>Lozinka</label>
+            <input>
+          </div>
+          <button>Logiraj se</button>
+    </div>
+    </div>
+    
+</body>
+</html>
