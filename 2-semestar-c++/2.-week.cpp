@@ -312,10 +312,44 @@ public:
 		for (int i = 0; i < size; i++) {
 			_glumackaPostava[i].unos(glumci[i]);
 		}
+		_trenutnoGlumaca = size;
+	}
+
+	void dodajGlumca(Glumac& glumac) {
+		if (_trenutnoGlumaca >= 20)
+			return;
+		_glumackaPostava[_trenutnoGlumaca].unos(glumac);
+		_trenutnoGlumaca++;
+	}
+
+	void setOcjene(int* ocjene, int size) {
+		_ocjene = new int[size];
+		for (int i = 0; i < size; i++) {
+			_ocjene[i] = ocjene[i];
+		}
+		_trenutnoOcjena= size;
 	}
 
 	void dodajOcjenu(int ocjena) {
-		// mozda pronaci rjesenje
+
+		// Kreiranje temporary niza
+		int* temp = _ocjene;	// temp = _ocjene = 0xaaab283f([2])
+
+		// Alokacija memorije
+		_ocjene = new int[_trenutnoOcjena + 1];		// _ocjene = 0xaaccff(815023490)
+		
+		// Kopiranje vrijednosti
+		for (int i = 0; i < _trenutnoOcjena; i++) {
+			_ocjene[i] = temp[i];	// _ocjene = 0xaaccff([2,4])
+		}
+		
+		// spremanje nove ocjene
+		_ocjene[_trenutnoOcjena] = ocjena;
+		
+		// uvecavanje brojaca
+		_trenutnoOcjena++;
+
+		delete[] temp;
 	}
 
 
@@ -366,7 +400,7 @@ void Menu() {
 			cout << "Zelite li pokrenuti novi zadatak? (1/0): ";
 			cin >> ponovnoPokretanje;
 			cout << endl;
-		} while (ponovnoPokretanje < 0 || ponovnoPokretanje > 1);
+		} while (ponovnoPokretanje < 0 || ponovnoPokretanje>1);
 
 	} while (unos < 1 || unos > 3 || ponovnoPokretanje);
 }
@@ -389,6 +423,8 @@ int main() {
 
 	Film film;
 	film.setGlumackaPostava(glumci, 2);
+	film.dodajOcjenu(2);
+	film.dodajOcjenu(4);
 
 	glumci[0].dealociraj();
 	glumci[1].dealociraj();
