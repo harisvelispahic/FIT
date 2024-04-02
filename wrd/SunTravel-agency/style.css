@@ -1,0 +1,359 @@
+﻿*{
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* font-family: century 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+    /* font-family: corbel; */
+
+}
+
+body{
+    margin: 0;
+}
+
+header{
+    background-image: url(images/background.jpg);
+    height: 800px;
+    background-size: cover;
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+}
+
+nav li{
+    display: inline;
+    padding: 10px;
+}
+nav li a{
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px;
+    border-radius: 2px;
+    border: 2px solid rgb(255,255,255,0);
+    font-weight: bolder;
+}
+
+nav li a:hover{
+    transition: 0.4s;
+    /* background-color: white; */
+    border: 2px solid white;
+    background-color: rgb(255,255,255,0.5);
+    color: rgb(0, 0, 0);
+    padding: 10px;
+}
+
+.header-container{
+    text-align: center;
+    color: white;
+    position: relative;
+    top: 40%;
+    font-size: 30px;
+}
+
+.header-tekst{
+    font-size: 40px;
+}
+
+.filter{
+    margin: auto;
+    width: 15%;
+    text-align: center;
+    padding: 30px 0;
+}
+
+#firma{
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+}
+
+.ponuda-dugme-1{
+    padding: 15px;
+    background-color: rgb(95, 158, 160);
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ponuda-dugme-1:hover{
+    transition: 0.4s;
+    background-color: rgb(49, 197, 202)
+}
+
+.subtitle{
+    color: gray;
+}
+
+.glavni-sadrzaj{
+    background-color: rgb(234, 234, 234);
+}
+
+
+/* parent element */
+ .ponude{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.destinacija{
+    padding: 0px;
+    margin: 20px;
+    box-shadow: 0px 3px 11px 0px rgba(0,0,0,0.75);
+    box-sizing: border-box;
+    position: relative;
+}
+
+.destinacija-istaknuto{
+    background-color: rgb(255,0,0,0.5);
+    color: white;
+    padding: 5px;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 35px;
+    right: 5px;
+}
+
+.destinacija-bg img{
+    width: 100%;
+}
+
+.destinacija-sadrzaj{
+    width: 95%;
+    margin: auto;
+}
+
+.destinacija-sadrzaj-prvired{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.destinacija-sadrzaj-soba select{
+    width: 100%;
+    padding: 3px 0;
+    margin: 5px 0;
+}
+
+.dugme-dest{
+    padding: 5px;
+    background-color: cadetblue;
+    color: white;
+    cursor: pointer;
+    margin: 15px auto;
+    text-align: center;
+    width: 70%;
+}
+
+.dugme-dest:hover{
+    transition: 0.4s;
+    background-color: rgb(49, 197, 202)
+}
+
+#slobodno-mjesto{
+    top: 50px;
+}
+
+.forma{
+    display: flex;
+    flex-direction: column;
+}
+
+.forma-row{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: 30px auto;
+}
+
+.form-kontrola{
+    display: flex;
+    flex-direction: column;
+    width: 47%;
+    /* margin: 0 15px; */
+}
+
+.form-kontrola input{
+    margin: 15px 0;
+    padding: 10px;
+    
+}
+
+.dest-cijena{
+    border-bottom: 2px solid gray;
+}
+
+.boldiraj{
+    font-weight: bold;
+}
+
+.text-area{
+    width: 60%;
+    margin: 30px auto;
+}
+
+.text-area textarea{
+    width: 100%;
+}
+
+.send-button{
+    display: block;
+    width: 60%;
+    margin: 10px auto;
+}
+
+
+.send-button button{
+    width: 25%;
+    background-color: orange;
+    color: white;
+    padding: 2% 3%;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.send-button button:hover{
+    transition: 0.4s;
+    background-color: darkorange;
+}
+
+footer{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: gray;
+}
+
+.copyright{
+    width: 50%;
+    margin: 15px;
+}
+
+footer ul{
+    padding: 0;
+    width: 50%;
+
+}
+
+footer li{
+    display: inline;
+    padding: 0 10px;
+    float: right;
+}
+
+@media only screen and (max-width: 600px){
+    *{
+        box-sizing: border-box;
+    }
+    nav{
+        display: block;
+        background-color: rgba(1, 107, 121, 0.7);
+        box-sizing: border-box;
+    }
+    .logo-container img{
+        display: block;
+        width: 50%;
+        margin: auto;
+        padding: 35px;
+    }
+    nav ul{
+        display: block;
+        width: 100%;
+        margin: auto;
+        padding: 0;
+        box-sizing: border-box;
+
+    }
+    nav li{
+        display: block;
+        border-top: 2px solid white;
+        text-align: center;
+        padding: 12px;
+    }
+    .header-container{
+        top: 10px;
+    }
+
+    .filter{
+        width: 70%;
+    }
+
+    #firma{
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+    
+    .ponuda-dugme-1{
+        padding: 15px;
+        background-color: cadetblue;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .forma-row{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin: 30px auto;
+        flex-direction: column;
+    }
+    .form-kontrola{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .text-area{
+        width: 80%;
+        margin: 30px auto;
+    }
+    .send-button button{
+        width: 100%;
+        background-color: darkorange;
+        color: white;
+        font-size: 20px;
+        padding: 15px 15px;
+        border: none;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+    .send-button{
+        width: 80%;
+    }
+
+    footer{
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        color: gray;
+        margin: auto;
+    }
+    
+    .copyright{
+        width: 90%;
+        /* margin: 15px; */
+        margin: auto;
+        text-align: center;
+    }
+    
+    footer ul{
+        padding: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    footer li{
+        padding: 0 10px;
+    }
+}
