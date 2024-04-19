@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav id="collapse-menu">
+      <header>
+        <img style="height: 40px" src="images/logo.png" />
+        <div class="dugmePrikazi" onclick="prikazi()">
+          <div class="xDugmePrikazi"></div>
+          <div class="xDugmePrikazi"></div>
+          <div class="xDugmePrikazi"></div>
+        </div>
+        <ul id="ulista">
+          <li>
+            <a>Home</a>
+          </li>
+          <li>
+            <a>About</a>
+          </li>
+          <li>
+            <a>Coffees</a>
+          </li>
+          <li>
+            <a>Shop</a>
+          </li>
+          <li>
+            <a>Blog</a>
+          </li>
+          <li>
+            <a>Contact</a>
+          </li>
+        </ul>
+      </header>
+
+      <div class="image-container">
+        <img src="images/banner-img.png" class="banner-img" />
+        <div class="banner-text">
+          <h1>coffee</h1>
+          <h2>Tasty of DozeCafe</h2>
+          <p>
+            more-or-less normal distribution of terrets, as apposed to using
+          </p>
+          <div class="banner-buttons">
+            <div id="button1">About Us</div>
+            <div id="button2">Call Now</div>
+          </div>
+        </div>
+      </div>
+      <div id="change-theme" onclick="changeButtons()">Change theme</div>
+    </nav>
+
+    <div class="coffee-offer-container">
+      <div class="offer-header">
+        <h1>OUR COFFEE OFFER</h1>
+        <img src="images/bulit-icon.png" />
+      </div>
+
+      <div class="coffee-offer-flex">
+        <div class="coffee-offer">
+          <img src="images/img-1.png" />
+          <h2>TYPES OF COFFEE</h2>
+          <p>looking at its layout. The point of</p>
+          <div class="offer-button">READ MORE</div>
+        </div>
+        <div class="coffee-offer">
+          <img src="images/img-2.png" />
+          <h2>BEAN VARIETIES</h2>
+          <p>looking at its layout. The point of</p>
+          <div class="offer-button">READ MORE</div>
+        </div>
+        <div class="coffee-offer">
+          <img src="images/img-3.png" />
+          <h2>COFFEE & PASTRY</h2>
+          <p>looking at its layout. The point of</p>
+          <div class="offer-button">READ MORE</div>
+        </div>
+        <div class="coffee-offer">
+          <img src="images/img-4.png" />
+          <h2>COFFEE TO GO</h2>
+          <p>looking at its layout. The point of</p>
+          <div class="offer-button">READ MORE</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-us">
+      <div class="offer-header">
+        <h1>ABOUT OUR SHOP</h1>
+        <img src="images/bulit-icon.png" />
+      </div>
+      <div class="about-us-content">
+        <div class="about-us-text">
+          <div class="about-us-text-container">
+            <p>Coffee distribution '</p>
+            has a more-or-less normal distribution of letters, as opposed to
+            using 'Content here, content here', making it look like readable
+            English. Many desktop publishing packages and web page editorhas a
+            more-or-less normal distribution of letters, as opposed to using
+            'Content here, content here', making it look like readable English.
+            Many desktop publishing packages and web page editor
+          </div>
+          <div class="offer-button">READ MORE</div>
+        </div>
+        <img src="images/about-img.png" />
+      </div>
+    </div>
+
+    <div class="customers-container">
+      <div class="offer-header">
+        <h1>WHAT OUR CUSTOMERS SAY</h1>
+        <img src="images/bulit-icon.png" />
+      </div>
+      <div class="customer">
+        <img src="images/client-img1.png" />
+        <div class="customer-text">
+          <h1>Joy Moark</h1>
+          <p>
+            now use Lorem Ipsum as their default model text, and a search for
+            'lorem ipsum' will uncover many web sites still in their infancynow
+            use Lorem Ipsum as their default model text,
+          </p>
+        </div>
+      </div>
+      <div class="customer">
+        <img src="images/client-img2.png" />
+        <div class="customer-text">
+          <h1>Joy Moark</h1>
+          <p>
+            now use Lorem Ipsum as their default model text, and a search for
+            'lorem ipsum' will uncover many web sites still in their infancynow
+            use Lorem Ipsum as their default model text,
+          </p>
+        </div>
+      </div>
+      <div class="customer">
+        <img src="images/client-img3.png" />
+        <div class="customer-text">
+          <h1>Joy Moark</h1>
+          <p>
+            now use Lorem Ipsum as their default model text, and a search for
+            'lorem ipsum' will uncover many web sites still in their infancynow
+            use Lorem Ipsum as their default model text,
+          </p>
+        </div>
+      </div>
+      <footer>2020 All Rights Reserved. FIT</footer>
+    </div>
+  </body>
+
+  <script>
+    var changeTheme = document.getElementById("change-theme");
+    var aboutUs = document.getElementById("button1");
+    var callNow = document.getElementById("button2");
+    var promjena = false;
+
+    function changeButtons() {
+      if (!promjena) {
+        // about us dugme
+        aboutUs.style.backgroundColor = "white";
+        aboutUs.style.color = "coral";
+        aboutUs.style.fontWeight = "bold";
+        aboutUs.style.border = "4px solid coral";
+        aboutUs.style.borderRadius = "10px";
+        aboutUs.style.transition = "0.4s";
+
+        // call now dugme
+        callNow.style.backgroundColor = "white";
+        callNow.style.color = "rgb(70,70,70)";
+        callNow.style.fontWeight = "bold";
+        callNow.style.border = "4px solid rgb(70,70,70)";
+        callNow.style.borderRadius = "10px";
+        callNow.style.transition = "0.4s";
+      } else {
+        // about us dugme
+        aboutUs.style.backgroundColor = "coral";
+        aboutUs.style.color = "white";
+        aboutUs.style.fontWeight = "bold";
+        aboutUs.style.transition = "0.4s";
+
+        // call now dugme
+        callNow.style.backgroundColor = "rgb(70,70,70)";
+        callNow.style.color = "white";
+        callNow.style.fontWeight = "bold";
+        callNow.style.transition = "0.4s";
+      }
+      promjena = !promjena;
+    }
+
+    var promjenaUl = false;
+    function prikazi() {
+      if (!promjenaUl) ulista.style.display = "none";
+      else ulista.style.display = "block";
+      promjenaUl = !promjenaUl;
+    }
+  </script>
+</html>
