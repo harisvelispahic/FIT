@@ -1,0 +1,318 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.pisani-font {
+    font-family: 'Pacifico', cursive;
+    color: orange;
+}
+
+body {
+     font-family: 'Oswald', sans-serif;
+}
+
+
+.toolbar-row{
+    display: flex;
+}
+
+.toolbar-row > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toolbar-cakezone{
+    background-color: orange;
+}
+
+.toolbar-cakezone h1{
+    padding: 10px;
+    border: 1px solid white;
+    background-color: orange;
+    font-size:36px;
+    text-transform: uppercase;
+    margin: 10px;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+.toolbar-row > div > img{
+    padding: 5px;
+    margin: 0px 10px;
+}
+
+.dugmePrikazi{
+    display: none;
+}
+
+.navbar{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+}
+
+.nav-item{    
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav-item.active
+{
+    color: orange;
+}
+
+.section-header
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 40px 0px;
+}
+.section-header h1{
+    text-transform: uppercase;
+    font-size: 40px;
+}
+
+.about-us-content
+{
+    display: flex;
+    justify-content: center;
+}
+
+.about-us-content .column-1
+{
+    padding: 30px;
+    padding-bottom: 0;
+    width: 60%;
+}
+
+
+.about-us-content .column-2
+{
+    width: 40%;
+    padding: 30px;
+    padding-bottom: 0;
+}
+.about-us-content .column-2 .two-columns{
+    display: flex;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.about-us-content .column-2 .two-columns .text{
+    margin-top: 10px;    
+}
+.line
+{
+    display: flex;
+    width: 150px;
+    align-items: center;
+}
+
+.line-part-1, .line-part-3
+{
+    border: 1px solid orange;
+    width: 100%;
+    height: 0px;
+}
+.line-part-2
+{
+    border: 4px solid orange;
+    width: 100%;
+}
+
+.dark-div{
+    background-color: black;
+    width: 100%;
+    height: 70px;
+}
+
+/* MOJ KOD */
+
+
+
+
+.column-2 .text{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 20;
+}
+
+
+.column-2 img{
+    outline : 10px solid #E88F2A;
+    border: 2px solid white;
+    padding: 5px;
+    margin: 10px;
+}
+
+.menu-selector{
+    display: flex;
+    justify-content: space-around;
+    margin: 30px;
+    background-color: black;
+    width: 65%;
+    margin-right: auto;
+    margin-left: auto;
+    border: 2px solid white;
+    outline: 20px solid black;
+
+    margin-bottom: 100px;
+}
+
+.menu-selector > div{
+    padding: 15px;
+    color: white;
+    margin: 10px;
+}
+
+#menu-selector-orange{
+    background-color: darkorange;
+}
+
+
+
+.price-table{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.item{
+    display: flex;
+    background-color: antiquewhite;
+    margin: 10px;
+    width: 45%; 
+}
+.column-price{
+    background-color: rgb(41, 41, 41);
+    color: darkorange;
+    text-align: center;
+}
+.column-description{
+    padding: 20px
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+}
+footer a{
+    text-decoration: none;
+    color: white;
+}
+
+
+@media screen and (max-width: 600px){
+    .toolbar-email{
+        display: none !important;   
+    }
+    .toolbar-callus{
+        display: none !important;      
+    }
+    .toolbar-cakezone,.toolbar-cakezone > h1{
+        background-color: black;
+        border: 0;
+    }
+    .toolbar{
+        background-color: black;
+    }
+    .toolbar-cakezone{
+        display: block;
+        position: relative;
+    }
+    h1.m-0{
+            text-align: left;
+    }
+    .dugmePrikazi{
+        display: block;
+        background-color: black;
+        color: white;
+        position: absolute;
+        right: 25px;
+        font-size: 30px;
+        border: 1px solid white;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+    }
+    
+    .navbar{
+        background-color: black;
+        display: block;
+        justify-content: center;
+        gap: 20px;
+        padding: 15px;
+    }
+    #izborniMeni{
+        display: none;
+    }
+    nav a{
+        display: block;
+        padding: 5px;
+    }
+    .nav-item{    
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+    
+    .nav-item.active
+    {
+        color: orange;
+    }
+
+    .about-us-content{
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    
+    .about-us-content .column-1
+    {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+
+    .about-us-content .column-2
+    {
+        width: 100%;
+    }
+    
+    .healty-column{
+        margin-bottom: 30px;
+    }
+
+    .award-column{
+        margin-bottom: 30px;
+    }
+
+    .two-columns{
+        flex-direction: column;
+    }
+
+    .menu-selector{
+        width: 80%;
+    }
+
+    .item{
+        width: 90%; 
+    }
+
+    .price-table{
+        margin-bottom: 30px;
+    }
+
+    footer > a{
+        display: inline;
+    }
+}
