@@ -162,6 +162,53 @@ public:
 		// else {exception}
 	}
 
+	// Z2.10 :: funkcija za umetanje vrijednosti 'element' u niz na lokaciju 'index'.
+	// ukoliko je '_trenutno' jednako _maxElemenata, uraditi prosirivanje niza za 10
+	// adekvatno pomjeriti elemente udesno.
+	// postaviti element na lokaciju index
+	// uvecati vrijednost brojaca '_trenutno' za 1
+	void insertAt(int index, T element) {
+		if (index < 0 || index >= _max)
+			return;
+		if (_trenutno == 0)
+			add(element);
+		if (_trenutno >= _max)
+			expand(10);
+		for (int i = _max - 1; i > index; i--) {
+			_niz[i] = _niz[i - 1];
+		}
+		_niz[index] = element;
+		_trenutno++;
+		// 1,2,3,4,_,5,6,7
+	}
+
+	// Z2.11 :: funkcija za brisanje elementa na lokaciji 'index'
+	// pomjeriti na adekvatan nacin elemente ulijevo
+	// umanjiti vrijednost brojaca '_trenutno'
+	bool removeAt(int index) {
+		if (_trenutno == 0 || index < 0 || index >= _max)
+			return false;
+		for (int i = index; i < _max - 1; i++) {
+			_niz[i] = _niz[i + 1];
+		}
+		_trenutno--;
+		return true;
+	}
+
+	// Z2.12 :: funkcija za provjeru postojanosti vrijednosti 'element' u okviru dinamickog niza
+	bool checkIfContains(T element) {
+		for (int i = 0; i < _trenutno; i++) {
+			if (_niz[i] == element)
+				return true;
+		}
+		return false;
+	}
+
+	// Z2.13 :: Sortiranje elemenata na osnovu specificiranog algoritma
+	void sortiraj(void(*algoritam)(T[], int, bool), bool reverse = false) {
+		algoritam(getNiz(), getTrenutno(), reverse);
+	}
+
 	~Vektor() {
 		delete[] _niz;
 		_niz = nullptr;
@@ -259,6 +306,60 @@ ostream& operator<<(ostream& COUT, Array<T, max>& obj) {
 }
 
 
+template <class T>
+void sortirajVektor(T* niz, int size, bool reverse = false) {
+	bool changeOccured = true;
+	if (!reverse) {
+		while (changeOccured) {
+			changeOccured = false;
+				for (int i = 0; i < size - 1; i++) {
+					if (niz[i] > niz[i + 1]) {
+						swap(niz[i], niz[i + 1]);
+						changeOccured = true;
+					}
+				}
+				size--;
+		}
+	}
+	else {
+		while (changeOccured) {
+			changeOccured = false;
+			for (int i = 0; i < size - 1; i++) {
+				if (niz[i] < niz[i + 1]) {
+					swap(niz[i], niz[i + 1]);
+					changeOccured = true;
+				}
+			}
+			size--;
+		}
+	}
+}
+
+void testSort() {
+	int cijeliBrojevi[10];
+	cout << "Niz cijelih brojeva: " << endl;
+	for (int i = 0; i < size(cijeliBrojevi); i++) {
+		cijeliBrojevi[i] = rand() % 100 + 1;
+		cout << i << " -> " << cijeliBrojevi[i] << endl;
+	}
+	cout << endl;
+
+
+	sortirajVektor(cijeliBrojevi, size(cijeliBrojevi));
+	cout << "Sortirani niz cijelih brojeva: " << endl;
+	for (int i = 0; i < size(cijeliBrojevi); i++) {
+		cout << i << " -> " << cijeliBrojevi[i] << endl;
+	}
+	cout << endl;
+
+	sortirajVektor(cijeliBrojevi, size(cijeliBrojevi), true);
+	cout << "Obrnuto sortirani niz cijelih brojeva: " << endl;
+	for (int i = 0; i < size(cijeliBrojevi); i++) {
+		cout << i << " -> " << cijeliBrojevi[i] << endl;
+	}
+	cout << endl;
+}
+
 int main() {
 
 	Datum d1;
@@ -278,6 +379,9 @@ int main() {
 	Vektor<Datum> datumiVek;
 	datumiVek.add(d1);
 	datumiVek.add(d2);
+	datumiVek.add(Datum(1, 1, 2024));
+	datumiVek.add(Datum(2, 1, 2022));
+	datumiVek.add(Datum(3, 4, 2023));
 	cout << "Drugi datum iz vektora datuma: " << datumiVek[1] << endl;
 
 	cout << "Vektor datuma: " << endl;
@@ -287,6 +391,35 @@ int main() {
 	Vektor<Datum> datumiVekCpy(datumiVek);
 	cout << "Kopija vektora datuma: " << endl;
 	cout << datumiVekCpy << endl;
+
+
+	Datum dInsert(2, 5, 2024);
+	cout << "Ubacujemo datum " << dInsert << " na 2. index..." << endl;
+	datumiVek.insertAt(2, dInsert);
+	cout << "Vektor datuma: " << endl;
+	cout << datumiVek << endl;
+
+	cout << "Brisemo datum sa 4. indexa..." << endl;
+	datumiVek.removeAt(4);
+	cout << "Vektor datuma: " << endl;
+	cout << datumiVek << endl;
+
+	Datum dCheck(1, 1, 2024);
+	cout << "Provjeravamo da li datum " << dCheck << " postoji u vektoru datuma..." << endl;
+	cout << "Datum " << dCheck << ((datumiVek.checkIfContains(dCheck)) ? " postoji" : " ne postoji") << " u vektoru" << endl;
+	cout << endl;
+	
+	// testSort();
+
+	void(*pSort)(Datum*, int, bool) = sortirajVektor<Datum>;		// pokazivac na genericku funkciju sortirajVektor, tj. "algoritam" pokazivac na funkciju u metodi "sortiraj"
+
+	datumiVek.sortiraj(sortirajVektor);
+	cout << "Sortirani vektor datuma: " << endl;
+	cout << datumiVek << endl;
+
+	datumiVek.sortiraj(pSort, true);
+	cout << "Unazad sortiran vektor datuma: " << endl;
+	cout << datumiVek << endl;
 
 	return 0;
 }
