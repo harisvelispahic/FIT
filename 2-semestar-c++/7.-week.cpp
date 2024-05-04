@@ -274,9 +274,9 @@ public:
 template<class T, int max>
 ostream& operator << (ostream& COUT, const Array<T, max>& obj) {
     for (int i = 0; i < obj.getTrenutno() - 1; i++) {
-        COUT << *obj.getElementi()[i] << ", ";
+        COUT << obj[i] << ", ";
     }
-    COUT << *obj.getElementi()[obj.getTrenutno() - 1];
+    COUT << obj[obj.getTrenutno() - 1];
     return COUT;
 }
 
