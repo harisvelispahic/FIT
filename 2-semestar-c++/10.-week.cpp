@@ -277,6 +277,7 @@ public:
     bool isValid() {
         if (!Vrijeme::isValid() || getDan() < 1 || getDan() > brojDanaUMjesecu(getMjesec(), getGodina()) || getMjesec() < Januar || getMjesec() > Decembar || getGodina() < 0)
             return false;               // rijesen problem vise funkcija sa istim imenom, koristenjem scope operatora
+        return true;
 
 #pragma region LambdaFunkcijaZaPrijestupnuGodinu
         // koristicemo lambda expression za leap year
@@ -368,6 +369,8 @@ public:
             _elementi[i] = nullptr;
         }
 
+        _trenutno = 0;
+
         if (elementi != nullptr) {
             for (int i = 0; i < trenutno; i++) {
                 add(*elementi[i]);
@@ -385,7 +388,7 @@ public:
 
     // Z3.4 :: funkcija za uklanjanje zadnjeg dodanog elementa [ne zaboravite dealokaciju]
     bool removeZadnji() {
-        if (_trenutno < 0)
+        if (_trenutno <= 0)
             return false;
         delete _elementi[--_trenutno];
         _elementi[_trenutno] = nullptr;
@@ -417,8 +420,10 @@ public:
     bool insertAt(int index, T element) {
         if (_trenutno >= max || index < 0 || index >= max)
             return false;
-        if (_trenutno == 0)
+        if (_trenutno == 0){
             add(element);
+            return true;
+        }
 
         _elementi[_trenutno] = new T;   // potrebno je prosiriti ovaj niz prije nego sto pokusamo pristupiti lokaciji na _trenutno jer ta memorija nije incijalizirana
         for (int i = _trenutno; i > index; i--) {
@@ -438,7 +443,8 @@ public:
         for (int i = index; i < _trenutno - 1; i++) {
             *(_elementi[i]) = *(_elementi[i + 1]);
         }
-        _trenutno--;
+        //_trenutno--;
+        removeZadnji();     // mora se obrisati pokazivac, a ne samo umanjiti _trenutno
     }
 
     // Z3.11 :: destruktor
@@ -464,6 +470,9 @@ ostream& operator << (ostream& COUT, const Array<T, max>& obj) {
 // Z3.13
 template<class T, int max>
 void ispis(const Array<T, max>& obj, const char* delimiter = " ") {
+    if (obj.getTrenutno() == 0)
+        return;
+
     for (int i = 0; i < obj.getTrenutno() - 1; i++) {
         cout << obj[i] << delimiter;
     }
