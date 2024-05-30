@@ -70,9 +70,9 @@ mutex mutexObj;
 
 bool ValidirajLozinku(string lozinka) {
     string minZnakova = "(?=.{7,})",
-        velikaSlova = "(?=.+[A-Z])",
-        malaSlova = "(?=.+[a-z])",
-        broj = "(?=.+\\d)",
+        velikaSlova = "(?=.*[A-Z])",
+        malaSlova = "(?=.*[a-z])",
+        broj = "(?=.*\\d)",
         specijalanZnak = "(?=.*[\\*\\-@])";
     string uzorak = minZnakova + velikaSlova + malaSlova + broj + specijalanZnak;
 
