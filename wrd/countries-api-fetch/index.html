@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countries</title>
+
+    <style>
+      img {
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body onload="preuzmiDrzave()">
+    <div id="drzave"></div>
+    <!-- <div class="drzava">
+      <p id="name">Name:</p>
+      <p id="population">Population:</p>
+      <p id="capital">Capital:</p>
+      <p id="currency">Currency:</p>
+      <p id="phone">Phone:</p>
+      <p id="abbr">Abbreviation:</p>
+      <p>Flag and emblem:</p>
+      <img src="" alt="" id="flag" />
+      <img src="" alt="" id="emblem" />
+      <hr />
+    </div> -->
+
+    <script>
+      preuzmiDrzave = () => {
+        fetch("https://api.sampleapis.com/countries/countries").then((res) => {
+          res.json().then((body) => {
+            // console.log(body[4]);
+            // document.getElementById("name").innerHTML += body[4].name;
+            // document.getElementById("population").innerHTML += body[4].population;
+            // document.getElementById("capital").innerHTML += body[4].capital;
+            // document.getElementById("currency").innerHTML += body[4].currency;
+            // document.getElementById("phone").innerHTML += body[4].phone;
+            // document.getElementById("abbr").innerHTML += body[4].abbreviation;
+            // document.getElementById("flag").src = body[4].media.flag;
+            // document.getElementById("emblem").src = body[4].media.emblem;
+            for (let i = 0; i < body.length; i++) {
+              document.getElementById("drzave").innerHTML += `
+              <div class="drzava${i}">
+      <p id="name">Name: ${body[i].name}</p>
+      <p id="population">Population: ${body[i].population}</p>
+      <p id="capital">Capital:${body[i].capital}</p>
+      <p id="currency">Currency:${body[i].currency}</p>
+      <p id="phone">Phone:${body[i].phone}</p>
+      <p id="abbr">Abbreviation:${body[i].abbreviation}</p>
+      <p>Flag and emblem:</p>
+      <img src="${body[i].media.flag}" alt="" id="flag" />
+      <img src="${body[i].media.emblem}" alt="" id="emblem" />
+      <hr />
+    </div>
+              `;
+            }
+          });
+        });
+      };
+    </script>
+  </body>
+</html>
