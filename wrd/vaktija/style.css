@@ -1,0 +1,77 @@
+.grad {
+  padding: 5px;
+  color: black;
+  border: 1px solid rgb(149, 149, 149);
+  margin: 5px;
+  width: 100px;
+  text-align: center;
+  z-index: 10;
+}
+.grad:hover {
+  background-color: rgba(199, 199, 199, 0.3);
+  transition: 0.4s;
+}
+
+#pretraga {
+  border-radius: 20px;
+  width: 400px;
+  height: 20px;
+  padding: 10px;
+  font-size: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#pretragaDiv {
+  width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+  z-index: 100;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+#vaktovi {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  position: relative;
+  z-index: 1;
+}
+
+#vaktoviDiv {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#vaktovi p {
+  padding-right: 30px;
+  padding-left: 30px;
+  text-align: center;
+}
+
+#izlazak-sunca {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+#gradovi {
+  display: flex;
+  /* height: 300px; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 200px;
+  margin: auto;
+  background-color: white;
+  position: relative;
+  z-index: 10;
+  box-shadow: -1px 5px 20px 0px rgba(0, 0, 0, 0.69);
+}
+
+p {
+  font-size: 20px;
+}

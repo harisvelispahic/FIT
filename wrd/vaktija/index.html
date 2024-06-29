@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body onload="preuzmiGradove()">
+    <!-- <label for="">Unesi ime grada</label><br /> -->
+    <div id="pretragaDiv">
+      <input
+        type="text"
+        id="pretraga"
+        oninput="pretraga()"
+        onfocus="selectText()"
+        placeholder="Unesite ime grada..."
+        autocomplete="off"
+      />
+    </div>
+    <div id="gradovi"></div>
+    <div id="vaktoviDiv">
+      <div id="vaktovi">
+        <div id="zoraDiv">
+          <p>Zora</p>
+          <p id="zora"></p>
+        </div>
+        <div id="izlazak-suncaDiv">
+          <p>Izlazak sunca</p>
+          <p id="izlazak-sunca"></p>
+        </div>
+        <div id="podneDiv">
+          <p>Podne</p>
+          <p id="podne"></p>
+        </div>
+        <div id="ikindijaDiv">
+          <p>Ikindija</p>
+          <p id="ikindija"></p>
+        </div>
+        <div id="aksamDiv">
+          <p>Aksam</p>
+          <p id="aksam"></p>
+        </div>
+        <div id="jacijaDiv">
+          <p>Jacija</p>
+          <p id="jacija"></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
