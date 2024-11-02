@@ -27,19 +27,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            lblWelcome = new Label();
             SuspendLayout();
+            // 
+            // lblWelcome
+            // 
+            lblWelcome.AutoSize = true;
+            lblWelcome.Font = new Font("Segoe UI", 13F);
+            lblWelcome.Location = new Point(23, 30);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(94, 25);
+            lblWelcome.TabIndex = 0;
+            lblWelcome.Text = "Welcome: ";
             // 
             // frmGlavna
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1116, 656);
+            Controls.Add(lblWelcome);
             Name = "frmGlavna";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form2";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label lblWelcome;
     }
 }

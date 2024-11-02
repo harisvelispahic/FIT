@@ -1,39 +1,15 @@
+using Data;
+
 namespace loginForm
 {
     public partial class frmLogin : Form
     {
-        private frmGlavna frmGlavna;
-        public frmLogin(frmGlavna frmGlavna)
+        public frmLogin()
         {
             InitializeComponent();
-            this.FormClosing += frmLogin_FormClosing;
-            this.frmGlavna = frmGlavna;
+            InternalDB.LoadUsers();
+            this.AcceptButton = btnLogin; // Sets Enter to trigger btnLogin
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        public class User
-        {
-            public int Id { get; set; }
-            public string firstName { get; set; }
-            public string lastName { get; set; }
-            public string Username { get; set; }
-            public string Password { get; set; }
-            public bool IsActive { get; set; }
-        }
-
-        public static class InternalDB
-        {
-            public static List<User> users = new List<User>() {
-                new User(){ Id = 0, firstName = "Haris", lastName = "Velispahic", Username = "haris123", Password = "12345678", IsActive = true },
-                new User(){ Id = 1, firstName = "Edin", lastName = "Dzeko", Username = "edinedin", Password = "edindzeko", IsActive = false}
-            };
-        }
-
-
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -55,7 +31,7 @@ namespace loginForm
         private void btnLogin_Click(object sender, EventArgs e)
         {
             bool found = false;
-            foreach (var user in InternalDB.users) {
+            foreach (var user in Data.InternalDB.users) {
                 if (!isAuthValid(txtUsername.Text)) {
                     errorUsername.SetError(txtUsername, "You must fill out this field.");
                     if (!isAuthValid(txtPassword.Text)) {
@@ -85,12 +61,11 @@ namespace loginForm
                         MessageBox.Show("This user does not have an active account.");
                         return;
                     }
-                    //MessageBox.Show("SUCCESS!");
-                    //frmGlavna frmGlavna = new frmGlavna();
-                    //frmGlavna.ShowDialog();
-                    this.DialogResult = DialogResult.OK;
-                    this.frmGlavna.Show();
+                    
+                    frmGlavna frmGlavna = new frmGlavna(txtUsername.Text);
+                    frmGlavna.Show();
                     this.Hide();
+
                     return;
                 }
 
@@ -120,6 +95,12 @@ namespace loginForm
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
             errorPassword.Clear();
+        }
+
+        private void btnSignUp_Click(object sender, EventArgs e)
+        {
+            frmSignUp frmSignUp = new frmSignUp();
+            frmSignUp.ShowDialog();
         }
     }
 }

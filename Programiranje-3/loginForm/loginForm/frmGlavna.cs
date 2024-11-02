@@ -12,12 +12,10 @@ namespace loginForm
 {
     public partial class frmGlavna : Form
     {
-        public frmGlavna()
+        public frmGlavna(string Username)
         {
             InitializeComponent();
-            frmLogin frmLogin = new frmLogin(this);
-            frmLogin.ShowDialog();
-            this.Hide();
+            lblWelcome.Text += Username;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace loginForm
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new frmLogin());
-            Application.Run(new frmGlavna());
+            Application.Run(new frmLogin());
         }
     }
 }
