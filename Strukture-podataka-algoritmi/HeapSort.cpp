@@ -48,13 +48,13 @@ void Print(vector<int> elements) {
 	cout << endl << endl;
 }
 
-void HeapSort(vector<int> elements) {
+void HeapSort(vector<int>& elements) {
 
 	heapify(elements, elements.size());
 
 	for (int i = elements.size() - 1; i >= 0; i--) {
 		swap(elements[0], elements[i]);
-		bubbleDown(elements, elements.size() - i, 0);
+		bubbleDown(elements, i, 0);
 	}
 }
 
