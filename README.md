@@ -1,4 +1,8 @@
-# Faculty of Information Technologies - Coursework Repository
+<p align="center">
+  <img src="assets/fit.png" alt="Faculty Logo" style="width: 100px; height: 100px; border-radius: 50%; display: inline-block; vertical-align: middle;">
+</p>
+
+<h1 align="center" style="text-transform: uppercase;">Faculty of Information Technologies - Coursework Repository</h1>
 
 Welcome to the official repository for my coursework and personal projects at the **Faculty of Information Technologies**! This repository serves as a central hub for all the work I complete during my studies, as well as additional projects I work on independently.
 
@@ -32,7 +36,7 @@ The projects in this repository align with the curriculum and cover the followin
 - **First & Second Semesters**
 
   - **C++**: Programming I & II
-  - **JavaScript**: Development projects
+  - **JavaScript**: Web development projects
 
 - **Third Semester** (current)
   - **C#**: Programming III
@@ -56,7 +60,6 @@ The repository is organized into folders by subject and semester:
 ## Acknowledgments
 
 - This repository is a product of my studies at the **Faculty of Information Technologies**.
-- ![Faculty Logo](assets/fit.png)
 
 ---
 
