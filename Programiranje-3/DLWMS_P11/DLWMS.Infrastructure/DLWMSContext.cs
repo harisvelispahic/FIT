@@ -12,7 +12,7 @@ namespace DLWMS.Infrastructure
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data source=C:\\Users\\xy\\Desktop\\cs-prgoramming-2024_25-main\\DLWMS.db");
+            optionsBuilder.UseSqlite("Data source=C:\\Users\\xy\\Desktop\\github\\FIT\\Programiranje-3\\DLWMS_P11\\DLWMS.db");
         }
 
         public DbSet<Student> Studenti { get; set; }
