@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace DLWMS.Infrastructure
 {
@@ -12,7 +13,7 @@ namespace DLWMS.Infrastructure
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data source=C:\\Users\\xy\\Desktop\\github\\FIT\\Programiranje-3\\DLWMS_P11\\DLWMS.db");
+            optionsBuilder.UseSqlite("Data source=DLWMS.db");
         }
 
         public DbSet<Student> Studenti { get; set; }
