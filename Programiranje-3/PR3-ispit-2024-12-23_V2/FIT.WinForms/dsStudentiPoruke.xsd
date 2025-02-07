@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsStudentiPoruke" targetNamespace="http://tempuri.org/dsStudentiPoruke.xsd" xmlns:mstns="http://tempuri.org/dsStudentiPoruke.xsd" xmlns="http://tempuri.org/dsStudentiPoruke.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsStudentiPoruke" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="dsStudentiPoruke" msprop:Generator_DataSetName="dsStudentiPoruke">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dtStudentiPoruke" msprop:Generator_RowEvHandlerName="dtStudentiPorukeRowChangeEventHandler" msprop:Generator_RowDeletedName="dtStudentiPorukeRowDeleted" msprop:Generator_RowDeletingName="dtStudentiPorukeRowDeleting" msprop:Generator_RowEvArgName="dtStudentiPorukeRowChangeEvent" msprop:Generator_TablePropName="dtStudentiPoruke" msprop:Generator_RowChangedName="dtStudentiPorukeRowChanged" msprop:Generator_RowChangingName="dtStudentiPorukeRowChanging" msprop:Generator_TableClassName="dtStudentiPorukeDataTable" msprop:Generator_RowClassName="dtStudentiPorukeRow" msprop:Generator_TableVarName="tabledtStudentiPoruke" msprop:Generator_UserTableName="dtStudentiPoruke">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Rb" msprop:Generator_ColumnPropNameInRow="Rb" msprop:Generator_ColumnPropNameInTable="RbColumn" msprop:Generator_ColumnVarNameInTable="columnRb" msprop:Generator_UserColumnName="Rb" type="xs:string" minOccurs="0" />
+              <xs:element name="Predmet" msprop:Generator_ColumnPropNameInRow="Predmet" msprop:Generator_ColumnPropNameInTable="PredmetColumn" msprop:Generator_ColumnVarNameInTable="columnPredmet" msprop:Generator_UserColumnName="Predmet" type="xs:string" minOccurs="0" />
+              <xs:element name="Poruka" msprop:Generator_ColumnPropNameInRow="Poruka" msprop:Generator_ColumnPropNameInTable="PorukaColumn" msprop:Generator_ColumnVarNameInTable="columnPoruka" msprop:Generator_UserColumnName="Poruka" type="xs:string" minOccurs="0" />
+              <xs:element name="BrojZnakova" msprop:Generator_ColumnPropNameInRow="BrojZnakova" msprop:Generator_ColumnPropNameInTable="BrojZnakovaColumn" msprop:Generator_ColumnVarNameInTable="columnBrojZnakova" msprop:Generator_UserColumnName="BrojZnakova" type="xs:string" minOccurs="0" />
+              <xs:element name="Validnost" msprop:Generator_ColumnPropNameInRow="Validnost" msprop:Generator_ColumnPropNameInTable="ValidnostColumn" msprop:Generator_ColumnVarNameInTable="columnValidnost" msprop:Generator_UserColumnName="Validnost" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
