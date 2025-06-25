@@ -1,9 +1,0 @@
-#include <iostream>
-using namespace std;
-
-int main(){
-
-  cout << "Programiranje II" << endl;
-
-  return 0;
-}
