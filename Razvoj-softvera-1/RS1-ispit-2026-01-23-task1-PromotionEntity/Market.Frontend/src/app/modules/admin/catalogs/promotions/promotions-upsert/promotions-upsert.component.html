@@ -1,0 +1,51 @@
+@if (isEditMode) {
+  <h1>Edit the promotion:</h1>
+} @else {
+  <h1>Add new promotion:</h1>
+}
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- <div>
+    <label for="">Id</label>
+    <input type="text" formControlName="id" />
+  </div> -->
+
+  <div>
+    <label for="">Title</label>
+    <input type="text" formControlName="title" />
+  </div>
+
+  <div>
+    <label for="">Image URL</label>
+    <input type="text" formControlName="imageUrl" />
+  </div>
+
+  <div>
+    <label for="">Target URL</label>
+    <input type="text" formControlName="targetUrl" />
+  </div>
+
+  <div>
+    <label for="">Is Active</label>
+    <input type="checkbox" formControlName="isActive" />
+  </div>
+
+  <div>
+    <label for="">Starts At UTC</label>
+    <input type="datetime-local" formControlName="startsAtUtc" />
+  </div>
+
+  <div>
+    <label for="">Ends At UTC</label>
+    <input type="datetime-local" formControlName="endsAtUtc" />
+  </div>
+
+  <div>
+    <label for="">Sort Order</label>
+    <input type="text" formControlName="sortOrder" />
+  </div>
+
+  <div>
+    <button type="submit" [disabled]="this.form.invalid">Submit</button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

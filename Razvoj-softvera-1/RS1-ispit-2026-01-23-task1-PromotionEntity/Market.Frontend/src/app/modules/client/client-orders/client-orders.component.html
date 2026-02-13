@@ -1,0 +1,89 @@
+<div class="orders-page">
+  <div class="orders-container">
+    <div class="page-header">
+      <h1 class="page-title">
+        <mat-icon>receipt_long</mat-icon>
+        Moje narudžbe
+      </h1>
+      <button mat-raised-button color="primary" routerLink="/">
+        <mat-icon>add_shopping_cart</mat-icon>
+        Nova narudžba
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-state" *ngIf="loading">
+      <mat-spinner diameter="60"></mat-spinner>
+      <p>Učitavanje narudžbi...</p>
+    </div>
+
+    <!-- Error State -->
+    <div class="error-state" *ngIf="error && !loading">
+      <mat-icon color="warn">error_outline</mat-icon>
+      <p>Greška pri učitavanju narudžbi</p>
+      <button mat-raised-button color="primary" (click)="loadOrders()">
+        <mat-icon>refresh</mat-icon>
+        Pokušaj ponovo
+      </button>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!loading && !error && orders.length === 0">
+      <mat-icon>receipt_long</mat-icon>
+      <h2>Nemate narudžbi</h2>
+      <p>Kada kreirate narudžbu, ona će se pojaviti ovdje</p>
+      <button mat-raised-button color="primary" routerLink="/">
+        <mat-icon>shopping_bag</mat-icon>
+        Započnite kupovinu
+      </button>
+    </div>
+
+    <!-- Orders Cards -->
+    <div class="orders-grid" *ngIf="!loading && !error && orders.length > 0">
+      <mat-card class="order-card" *ngFor="let order of orders" (click)="viewDetails(order.id)">
+        <mat-card-header>
+          <mat-card-title>
+            <span class="order-reference">{{ order.referenceNumber || 'N/A' }}</span>
+            <span class="status-badge" [ngClass]="getStatusClass(order.status)">
+              {{ getStatusLabel(order.status) }}
+            </span>
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ formatDate(order.orderedAtUtc) }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="order-info">
+            <div class="info-row">
+              <mat-icon>person</mat-icon>
+              <span>{{ order.user.userFirstname }} {{ order.user.userLastname }}</span>
+            </div>
+            
+            <div class="info-row" *ngIf="order.user.userAddress">
+              <mat-icon>location_on</mat-icon>
+              <span>{{ order.user.userAddress }}, {{ order.user.userCity }}</span>
+            </div>
+
+            <div class="info-row" *ngIf="order.note">
+              <mat-icon>note</mat-icon>
+              <span class="note-text">{{ order.note }}</span>
+            </div>
+          </div>
+
+          <div class="order-total">
+            <span class="total-label">Ukupno:</span>
+            <span class="total-amount">{{ order.totalAmount | currency:'BAM' }}</span>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-button color="primary">
+            <mat-icon>visibility</mat-icon>
+            Detalji
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

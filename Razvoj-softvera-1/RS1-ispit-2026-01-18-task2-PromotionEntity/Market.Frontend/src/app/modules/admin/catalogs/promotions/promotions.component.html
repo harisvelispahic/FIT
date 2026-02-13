@@ -1,0 +1,55 @@
+<div>
+  <div>
+    <label for="search">Search</label>
+    <input type="text" id="search" [formControl]="searchControl" />
+
+    <button routerLink="add">Add new promotion</button>
+  </div>
+
+  <div>
+    <label for="">Only active?</label>
+    <input type="checkbox" [(ngModel)]="this.request.isActive" (change)="loadPagedData()" />
+  </div>
+</div>
+
+@if (isLoading) {
+  <p>Loading...</p>
+} @else if (totalItems === 0) {
+  <p>No promotions fit the criteria...</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <!-- <th>ImageUrl</th> -->
+        <!-- <th>TargetUrl</th> -->
+        <th>IsActive</th>
+        <th>StartsAtUtc</th>
+        <th>EndsAtUtc</th>
+        <th>SortOrder</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (item of items; track $index) {
+        <tr>
+          <td>{{ item.id }}</td>
+          <td (click)="onViewDetails(item, $event)">{{ item.title }}</td>
+          <!-- <td>{{ item.imageUrl }}</td> -->
+          <!-- <td>{{ item.targetUrl }}</td> -->
+          <td><input type="checkbox" [checked]="item.isActive" /></td>
+          <td>{{ item.startsAtUtc }}</td>
+          <td>{{ item.endsAtUtc }}</td>
+          <td>{{ item.sortOrder }}</td>
+          <td>
+            <button (click)="onViewDetails(item, $event)">View</button>
+            <button (click)="onEdit(item)">Edit</button>
+            <button (click)="onDelete(item)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

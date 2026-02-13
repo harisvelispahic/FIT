@@ -1,0 +1,31 @@
+<h2>{{ title }}</h2>
+
+<div *ngIf="isLoading">
+  <p>Loading form...</p>
+</div>
+
+<form [formGroup]="form" *ngIf="!isLoading && form">
+  <div>
+    <label>Name</label>
+    <input type="text" formControlName="name" />
+
+    <div *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+      {{ getErrorMessage('name') }}
+    </div>
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox" formControlName="isEnabled" />
+      Active
+    </label>
+  </div>
+
+  <div>
+    <button type="button" (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+
+    <button type="button" (click)="onSubmit()" [disabled]="form.invalid || isLoading">
+      {{ isEditMode ? 'Update' : 'Save' }}
+    </button>
+  </div>
+</form>

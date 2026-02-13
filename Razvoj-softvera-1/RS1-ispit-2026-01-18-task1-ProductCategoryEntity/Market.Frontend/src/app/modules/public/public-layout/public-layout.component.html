@@ -1,0 +1,56 @@
+<!-- Public Layout Shell with Toolbar -->
+<mat-toolbar color="primary" class="public-toolbar">
+  <button mat-icon-button routerLink="/" class="brand-button">
+    <mat-icon>storefront</mat-icon>
+  </button>
+  <span class="brand-name">FIT Market</span>
+  
+  <span class="spacer"></span>
+  
+  <!-- Cart Button with Badge -->
+  <button 
+    mat-icon-button 
+    routerLink="/cart" 
+    [matBadge]="cartCount()" 
+    [matBadgeHidden]="cartCount() === 0"
+    matBadgeColor="accent"
+    matTooltip="Korpa">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+  
+  <!-- Auth Buttons -->
+  <ng-container *ngIf="!isAuthenticated(); else userMenu">
+    <button mat-button routerLink="/auth/login">
+      <mat-icon>login</mat-icon>
+      Prijava
+    </button>
+  </ng-container>
+  
+  <ng-template #userMenu>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+      {{ currentUser()?.email }}
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/client/orders">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Moje narudžbe</span>
+      </button>
+      <button mat-menu-item routerLink="/admin" *ngIf="currentUser()?.isAdmin">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span>Admin panel</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item routerLink="/auth/logout">
+        <mat-icon>logout</mat-icon>
+        <span>Odjava</span>
+      </button>
+    </mat-menu>
+  </ng-template>
+</mat-toolbar>
+
+<!-- Router Outlet for Child Routes -->
+<div class="public-content">
+  <router-outlet></router-outlet>
+</div>

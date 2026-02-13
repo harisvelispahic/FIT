@@ -1,0 +1,52 @@
+<div>
+  <div>
+    <label for="">Search</label>
+    <input type="text" [(ngModel)]="this.request.search" (input)="loadPagedData()" />
+    <button (click)="onCreate()">Add new promotion</button>
+  </div>
+  <div>
+    <label for="">Only active?</label>
+    <input type="checkbox" [(ngModel)]="this.request.onlyActive" (change)="loadPagedData()" />
+  </div>
+</div>
+
+@if (isLoading) {
+  <p>Loading...</p>
+} @else if (totalItems === 0) {
+  <p>No promotions fit the criteria...</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Is Active</th>
+        <th>Starts At Utc</th>
+        <th>Ends At Utc</th>
+        <th>Sort Order</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (item of items; track $index) {
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.title }}</td>
+          <td>
+            <input type="checkbox" [checked]="item.isActive" (change)="onToggleStatus(item)" />
+          </td>
+          <td>{{ item.startsAtUtc }}</td>
+          <td>{{ item.endsAtUtc }}</td>
+          <td>{{ item.sortOrder }}</td>
+          <td>
+            <button (click)="onEdit(item.id)">Edit</button>
+            <button (click)="onDelete(item)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+<app-fit-paginator-bar [vm]="this"></app-fit-paginator-bar>

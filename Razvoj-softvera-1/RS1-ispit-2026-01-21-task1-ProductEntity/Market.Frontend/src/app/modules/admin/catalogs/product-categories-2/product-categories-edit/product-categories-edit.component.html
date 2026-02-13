@@ -1,0 +1,27 @@
+<p>product-categories-edit works!</p>
+
+
+
+<form class="neka-forma" *ngIf="productCategoryDto" [formGroup]="form" (ngSubmit)="save()">
+  <div>
+    <label>Id</label>
+    <input formControlName="id" readonly>
+  </div>
+  <div>
+    <label>Is enabled</label>
+    <input type="checkbox" formControlName="isEnabled">
+  </div>
+  <div>
+    <label>Name</label>
+    <input formControlName="name">
+  </div>
+
+  <button type="submit" [disabled]="form.invalid || isLoading">Save</button>
+</form>
+
+<div *ngIf="!productCategoryDto">
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>{{ 'PRODUCT_CATEGORIES.FORM.LOADING' | translate }}</p>
+  </div>
+</div>

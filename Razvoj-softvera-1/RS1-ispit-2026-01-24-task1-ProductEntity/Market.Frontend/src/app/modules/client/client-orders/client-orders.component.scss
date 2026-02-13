@@ -1,0 +1,240 @@
+.orders-page {
+  min-height: calc(100vh - 64px);
+  padding: 40px 24px;
+  background: linear-gradient(135deg, #f0f5fb 0%, #e3ecf7 100%);
+
+  .orders-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    .page-title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 32px;
+      font-weight: 700;
+      color: #212121;
+      margin: 0;
+
+      mat-icon {
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+        color: #4976b5;
+      }
+    }
+
+    button {
+      height: 48px;
+      padding: 0 24px;
+      font-weight: 600;
+
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  // Loading/Error/Empty States
+  .loading-state,
+  .error-state,
+  .empty-state {
+    text-align: center;
+    padding: 80px 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    mat-spinner {
+      margin: 0 auto 24px;
+    }
+
+    mat-icon {
+      font-size: 80px;
+      width: 80px;
+      height: 80px;
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #212121;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #757575;
+      margin-bottom: 24px;
+    }
+
+    button {
+      height: 48px;
+      padding: 0 32px;
+      font-size: 16px;
+
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  // Orders Grid
+  .orders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 24px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .order-card {
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(73, 118, 181, 0.2);
+      }
+
+      mat-card-header {
+        mat-card-title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+
+          .order-reference {
+            font-size: 18px;
+            font-weight: 700;
+            color: #4976b5;
+          }
+
+          .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+
+            &.status-draft {
+              background: #f3f4f6;
+              color: #6b7280;
+            }
+
+            &.status-confirmed {
+              background: #dbeafe;
+              color: #1e40af;
+            }
+
+            &.status-paid {
+              background: #fef3c7;
+              color: #92400e;
+            }
+
+            &.status-completed {
+              background: #d1fae5;
+              color: #065f46;
+            }
+
+            &.status-cancelled {
+              background: #fee2e2;
+              color: #991b1b;
+            }
+          }
+        }
+
+        mat-card-subtitle {
+          font-size: 14px;
+          color: #757575;
+          margin-top: 4px;
+        }
+      }
+
+      mat-card-content {
+        padding-top: 16px;
+
+        .order-info {
+          margin-bottom: 16px;
+
+          .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #616161;
+
+            mat-icon {
+              font-size: 20px;
+              width: 20px;
+              height: 20px;
+              color: #9ca3af;
+              flex-shrink: 0;
+            }
+
+            span {
+              flex: 1;
+            }
+
+            .note-text {
+              font-style: italic;
+              color: #757575;
+            }
+          }
+        }
+
+        .order-total {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px;
+          background: linear-gradient(135deg, #f0f5fb 0%, #e3ecf7 100%);
+          border-radius: 8px;
+          margin-top: 16px;
+
+          .total-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #616161;
+          }
+
+          .total-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4976b5;
+          }
+        }
+      }
+
+      mat-card-actions {
+        padding: 16px;
+        border-top: 1px solid #e3e8ef;
+
+        button {
+          width: 100%;
+          height: 44px;
+          font-weight: 600;
+
+          mat-icon {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+}

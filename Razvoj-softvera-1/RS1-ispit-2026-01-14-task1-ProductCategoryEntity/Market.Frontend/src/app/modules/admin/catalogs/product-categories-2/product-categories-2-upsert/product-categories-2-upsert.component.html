@@ -1,0 +1,21 @@
+@if (form){
+
+<form [formGroup]="form">
+  <h1>{{ this.title }}</h1>
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" formControlName="name" />
+  </div>
+  <div>
+    <label for="isEnabled">Active</label>
+    <input type="checkbox" id="isEnabled" formControlName="isEnabled" />
+  </div>
+  @if(form.get("name")?.invalid){
+  <p>{{ getErrorMessage('name') }}</p>
+  }
+
+  <button (click)="submitAction()" [disabled]="form.invalid">Save</button>
+  <button (click)="cancelAction()">Cancel</button>
+</form>
+
+}

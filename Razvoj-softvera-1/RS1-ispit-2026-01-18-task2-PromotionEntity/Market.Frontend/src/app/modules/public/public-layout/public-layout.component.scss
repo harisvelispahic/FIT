@@ -1,0 +1,52 @@
+.public-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .brand-button {
+    margin-right: 8px;
+  }
+
+  .brand-name {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  button[mat-icon-button] {
+    margin: 0 4px;
+  }
+
+  button[mat-button] {
+    margin: 0 4px;
+    
+    mat-icon {
+      margin-right: 4px;
+    }
+  }
+}
+
+.public-content {
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(135deg, #f0f5fb 0%, #e3ecf7 100%);
+}
+
+// Mobile responsive
+@media (max-width: 600px) {
+  .public-toolbar {
+    .brand-name {
+      font-size: 16px;
+    }
+
+    button[mat-button] {
+      span {
+        display: none;
+      }
+    }
+  }
+}

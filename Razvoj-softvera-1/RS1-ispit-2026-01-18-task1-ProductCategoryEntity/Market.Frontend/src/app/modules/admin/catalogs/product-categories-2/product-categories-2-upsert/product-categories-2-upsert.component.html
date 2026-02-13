@@ -1,0 +1,26 @@
+@if (isEditMode) {
+  <h1>Edit the category:</h1>
+} @else {
+  <h1>Add new category:</h1>
+}
+
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div>
+    <label for="name">Name: </label>
+    <input type="text" id="name" formControlName="name" />
+  </div>
+
+  <div>
+    <label for="isEnabled">Is Enabled: </label>
+    <input type="checkbox" id="isEnabled" formControlName="isEnabled" />
+  </div>
+
+  @if (this.form.get('name')?.invalid && this.form.get('name')?.touched) {
+    <p>Name: {{ this.getErrorMessage('name') }}</p>
+  }
+  @if (this.form.get('isEnabled')?.invalid && this.form.get('isEnabled')?.touched) {
+    <p>Is Enabled: {{ this.getErrorMessage('isEnabled') }}</p>
+  }
+  <button type="submit" [disabled]="this.form.invalid">Submit</button>
+  <button type="button" (click)="onCancel()">Cancel</button>
+</form>

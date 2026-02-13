@@ -1,0 +1,47 @@
+<p>product-categories-2 works!</p>
+
+<input [(ngModel)]="searchValue" (keydown)="inputKeyDown($event)" >
+<button (click)="searchAction()">Search</button>
+<div *ngIf="totalItems ===0">
+  <img src="images/no-data.png"/>
+</div>
+
+<!-- Loading State -->
+<div *ngIf="isLoading" class="loading-container">
+  <mat-spinner diameter="40"></mat-spinner>
+  <p>{{ 'PRODUCT_CATEGORIES.FORM.LOADING' | translate }}</p>
+</div>
+
+<button routerLink="add">Add</button>
+
+<table *ngIf="totalItems!==0">
+  <thead>
+  <th>
+    Id
+  </th>
+  <th>
+    Name
+  </th>
+  <th>
+    Is enabled
+  </th>
+  <th>
+    Actions
+  </th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let x of items">
+    <td>{{ x.id }}</td>
+    <td>{{ x.name }}</td>
+    <td>{{ x.isEnabled ? "Da" : "Ne" }}
+      <input type="checkbox" [checked]="x.isEnabled" (change)="changeStatus(x, $event)">
+    </td>
+    <td>
+      <button (click)="deleteAction(x)">Obriši</button>
+      <button (click)="editAction(x)">Uredi</button>
+    </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-fit-paginator-bar [vm]="this" />

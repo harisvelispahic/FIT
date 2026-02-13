@@ -1,0 +1,321 @@
+.cart-page {
+  min-height: calc(100vh - 64px);
+  padding: 40px 24px;
+  background: linear-gradient(135deg, #f0f5fb 0%, #e3ecf7 100%);
+
+  .cart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 32px;
+
+    mat-icon {
+      font-size: 40px;
+      width: 40px;
+      height: 40px;
+      color: #4976b5;
+    }
+  }
+
+  // Empty Cart State
+  .empty-cart {
+    text-align: center;
+    padding: 80px 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    mat-icon {
+      font-size: 120px;
+      width: 120px;
+      height: 120px;
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #212121;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #757575;
+      margin-bottom: 32px;
+    }
+
+    button {
+      height: 48px;
+      padding: 0 32px;
+      font-size: 16px;
+
+      mat-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 24px;
+        margin-right: 8px;
+        color: white;
+      }
+    }
+  }
+
+  // Cart Content Layout
+  .cart-content {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 24px;
+    align-items: start;
+
+    @media (max-width: 968px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Cart Items
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow: 0 4px 12px rgba(73, 118, 181, 0.15);
+      }
+
+      .item-info {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        flex: 1;
+
+        .item-image {
+          width: 80px;
+          height: 80px;
+          background: linear-gradient(135deg, #f0f5fb 0%, #e3ecf7 100%);
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          mat-icon {
+            font-size: 40px;
+            width: 40px;
+            height: 40px;
+            color: #4976b5;
+            opacity: 0.5;
+          }
+        }
+
+        .item-details {
+          flex: 1;
+
+          .item-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212121;
+            margin: 0 0 8px 0;
+          }
+
+          .item-price {
+            font-size: 16px;
+            color: #4976b5;
+            font-weight: 600;
+            margin: 0;
+          }
+        }
+      }
+
+      .item-actions {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+
+        @media (max-width: 768px) {
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .quantity-controls {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          background: #f5f8fc;
+          border-radius: 8px;
+          padding: 4px;
+
+          button {
+            width: 36px;
+            height: 36px;
+
+            mat-icon {
+              font-size: 20px;
+            }
+          }
+
+          .quantity-input {
+            width: 60px;
+            height: 36px;
+            text-align: center;
+            border: none;
+            background: white;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #212121;
+
+            &:focus {
+              outline: 2px solid #4976b5;
+            }
+
+            // Remove spinner arrows
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+            -moz-appearance: textfield;
+          }
+        }
+
+        .item-subtotal {
+          min-width: 100px;
+          text-align: right;
+          font-size: 20px;
+          font-weight: 700;
+          color: #4976b5;
+        }
+
+        button[color="warn"] {
+          mat-icon {
+            color: #ef5350;
+          }
+        }
+      }
+    }
+  }
+
+  // Checkout Summary
+  .checkout-summary {
+    position: sticky;
+    top: 88px;
+
+    mat-card {
+      mat-card-header {
+        mat-card-title {
+          font-size: 20px;
+          font-weight: 700;
+          color: #212121;
+        }
+      }
+
+      mat-card-content {
+        padding-top: 16px;
+
+        .summary-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 0;
+          font-size: 15px;
+          color: #616161;
+
+          .summary-value {
+            font-weight: 600;
+            color: #212121;
+          }
+
+          &.total-row {
+            font-size: 18px;
+            font-weight: 700;
+            color: #212121;
+            padding-top: 16px;
+
+            .total-amount {
+              font-size: 24px;
+              color: #4976b5;
+            }
+          }
+        }
+
+        mat-divider {
+          margin: 16px 0;
+        }
+
+        .note-field {
+          width: 100%;
+          margin-top: 16px;
+        }
+      }
+
+      mat-card-actions {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .checkout-button {
+          width: 100%;
+          height: 56px;
+          font-size: 18px;
+          font-weight: 600;
+
+          mat-icon,
+          mat-spinner {
+            margin-right: 8px;
+          }
+        }
+
+        button[mat-button] {
+          width: 100%;
+          height: 44px;
+
+          mat-icon {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .cart-page {
+    padding: 24px 16px;
+
+    .cart-items .cart-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+
+      .item-info {
+        width: 100%;
+      }
+
+      .item-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    .checkout-summary {
+      position: static;
+    }
+  }
+}

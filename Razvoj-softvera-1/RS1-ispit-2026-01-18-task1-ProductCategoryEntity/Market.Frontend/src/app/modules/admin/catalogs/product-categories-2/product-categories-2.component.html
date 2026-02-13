@@ -1,0 +1,47 @@
+<div>
+  <label for="search">Search</label>
+  <input type="text" id="search" [(ngModel)]="this.request.search" (input)="onSearch()" />
+  <button (click)="onCreate()">Add new category</button>
+</div>
+<label for="onlyEnabled">Only enabled?</label>
+<input
+  type="checkbox"
+  id="onlyEnabled"
+  [(ngModel)]="this.request.onlyEnabled"
+  (change)="onToggleEnabledFilter()"
+/>
+
+@if (isLoading) {
+  <p>Loading...</p>
+} @else if (totalItems === 0) {
+  <p>No categories fit the criteria...</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>IsEnabled</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (item of items; track $index) {
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>
+            <input type="checkbox" [checked]="item.isEnabled" (change)="onToggleStatus(item)" />
+          </td>
+          <td>
+            <button (click)="onEdit(item)">Edit</button>
+            <button (click)="onDelete(item)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+<app-fit-paginator-bar [vm]="this"></app-fit-paginator-bar>

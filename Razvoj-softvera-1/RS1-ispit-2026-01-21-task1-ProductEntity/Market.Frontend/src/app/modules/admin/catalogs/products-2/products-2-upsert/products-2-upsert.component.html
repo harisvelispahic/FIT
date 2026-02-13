@@ -1,0 +1,56 @@
+@if (isEditMode) {
+  <h1>Edit the product:</h1>
+} @else {
+  <h1>Add new product:</h1>
+}
+<form [formGroup]="this.form" (submit)="onSubmit()">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" formControlName="name" />
+  </div>
+
+  <div>
+    <label for="description">Description</label>
+    <input type="text" id="description" formControlName="description" />
+  </div>
+
+  <div>
+    <label for="price">Price</label>
+    <input type="number" id="price" formControlName="price" />
+  </div>
+
+  <div>
+    <label for="stockQuantity">Stock Quantity</label>
+    <input type="number" id="stockQuantity" formControlName="stockQuantity" />
+  </div>
+
+  <div>
+    <label for="categoryId">CategoryId</label>
+    <select name="categoryId" id="categoryId" formControlName="categoryId">
+      @for (category of categories; track $index) {
+        <option [value]="category.id">{{ category.name }}</option>
+      }
+    </select>
+  </div>
+
+  @if (form.get('name')?.invalid && form.get('name')?.touched) {
+    <p>Name: {{ getErrorMessage('name') }}</p>
+  }
+  @if (form.get('description')?.invalid && form.get('description')?.touched) {
+    <p>Description: {{ getErrorMessage('description') }}</p>
+  }
+  @if (form.get('price')?.invalid && form.get('price')?.touched) {
+    <p>Price: {{ getErrorMessage('price') }}</p>
+  }
+  @if (form.get('stockQuantity')?.invalid && form.get('stockQuantity')?.touched) {
+    <p>Stock quantity: {{ getErrorMessage('stockQuantity') }}</p>
+  }
+  @if (form.get('categoryId')?.invalid && form.get('categoryId')?.touched) {
+    <p>Category Id: {{ getErrorMessage('categoryId') }}</p>
+  }
+
+  <div>
+    <button type="submit" [disabled]="form.invalid">Submit</button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

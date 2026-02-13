@@ -1,0 +1,50 @@
+<div>
+  <label for="search">Search</label>
+  <input type="text" id="search" [(ngModel)]="request.search" (input)="searchResults()" />
+  <button (click)="createNewCategory()">New category</button>
+</div>
+
+<div>
+  <label for="isEnabled">Only enabled?</label>
+  <input
+    type="checkbox"
+    id="isEnabled"
+    (change)="changeEnabledChoice()"
+    [(ngModel)]="request.onlyEnabled"
+  />
+</div>
+
+@if(isLoading){
+<p>Loading...</p>
+} @else if (totalItems === 0){
+<p>No items found</p>
+} @else {
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Enabled?</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for(item of items; track $index){
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+      <td>
+        <input type="checkbox" [checked]="item.isEnabled" />
+      </td>
+      <td>
+        <button (click)="editCategory(item.id)">Edit</button>
+        <button (click)="onDelete(item)">Delete</button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+}

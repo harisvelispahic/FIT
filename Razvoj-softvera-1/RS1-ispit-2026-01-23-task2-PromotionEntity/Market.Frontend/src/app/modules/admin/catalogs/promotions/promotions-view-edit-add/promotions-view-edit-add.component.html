@@ -1,0 +1,101 @@
+@if (this.mode === 'view') {
+  <h1>View details:</h1>
+} @else if (this.mode === 'edit') {
+  <h1>Edit the promotion:</h1>
+} @else {
+  <h1>Add new promotion:</h1>
+}
+
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div>
+    <label>Title</label>
+    <input type="text" formControlName="title" />
+  </div>
+
+  <div>
+    <label>Image Url</label>
+    <input type="text" formControlName="imageUrl" />
+  </div>
+
+  <div>
+    <label>Target Url</label>
+    <input type="text" formControlName="targetUrl" />
+  </div>
+
+  <div>
+    <label>Is Active</label>
+    <input type="checkbox" formControlName="isActive" />
+  </div>
+
+  <div>
+    <label>Starts at UTC</label>
+    <input type="datetime-local" formControlName="startsAtUtc" />
+  </div>
+
+  <div>
+    <label>Ends at UTC</label>
+    <input type="datetime-local" formControlName="endsAtUtc" />
+  </div>
+
+  <div>
+    <label>Sort order</label>
+    <input type="number" formControlName="sortOrder" step="1" />
+  </div>
+
+  <div formArrayName="promotionItems">
+    @if (promotionItems.length) {
+      @for (item of this.promotionItems.controls; track $index) {
+        <div [formGroupName]="$index">
+          <h3>Promotion item {{ $index + 1 }}</h3>
+
+          <div>
+            <label>Product</label>
+            <select formControlName="productId">
+              @for (product of this.products; track $index) {
+                <option [ngValue]="product.id">{{ product.name }}</option>
+              }
+            </select>
+          </div>
+
+          <div>
+            <label>Discount percent</label>
+            <input type="number" formControlName="discountPercent" step="1" />
+          </div>
+        </div>
+        @if (this.mode !== 'view') {
+          <button (click)="removePromotionItem($index)">Remove product</button>
+        }
+      }
+    }
+    @if (this.mode !== 'view') {
+      <button (click)="addPromotionItem()">Add new product</button>
+    }
+  </div>
+  <div>
+    @if (this.mode !== 'view') {
+      <button type="submit" [disabled]="form.invalid">Submit</button>
+    }
+    <button routerLink="/admin/promotions">Cancel</button>
+  </div>
+
+  <div>
+    @if (form.get('title')?.invalid && form.get('title')?.touched) {
+      <p>Title: {{ getErrorMessage('title') }}</p>
+    }
+    @if (form.get('imageUrl')?.invalid && form.get('imageUrl')?.touched) {
+      <p>imageUrl: {{ getErrorMessage('imageUrl') }}</p>
+    }
+    @if (form.get('targetUrl')?.invalid && form.get('targetUrl')?.touched) {
+      <p>targetUrl: {{ getErrorMessage('targetUrl') }}</p>
+    }
+    @if (form.get('startsAtUtc')?.invalid && form.get('startsAtUtc')?.touched) {
+      <p>startsAtUtc: {{ getErrorMessage('startsAtUtc') }}</p>
+    }
+    @if (form.get('endsAtUtc')?.invalid && form.get('endsAtUtc')?.touched) {
+      <p>endsAtUtc: {{ getErrorMessage('endsAtUtc') }}</p>
+    }
+    @if (form.get('sortOrder')?.invalid && form.get('sortOrder')?.touched) {
+      <p>sortOrder: {{ getErrorMessage('sortOrder') }}</p>
+    }
+  </div>
+</form>

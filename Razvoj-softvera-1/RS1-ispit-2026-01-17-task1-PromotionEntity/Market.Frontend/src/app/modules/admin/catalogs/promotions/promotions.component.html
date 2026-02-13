@@ -1,0 +1,62 @@
+<div>
+  <div>
+    <label for="search">Search</label>
+    <input type="text" id="search" [(ngModel)]="request.search" (input)="onSearchChange()" />
+    <button (click)="onCreate()">Add new promotion</button>
+  </div>
+
+  <div>
+    <label for="active">Active?</label>
+    <input
+      type="checkbox"
+      id="active"
+      [(ngModel)]="request.onlyActive"
+      (change)="onToggleActiveFilter()"
+    />
+  </div>
+</div>
+
+@if (isLoading) {
+  <p>Loading...</p>
+} @else if (this.totalItems === 0) {
+  <p>No promotions...</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <!-- <th>ImageUrl</th> -->
+        <!-- <th>TargetUrl</th> -->
+        <th>IsActive</th>
+        <th>StartsAtUtc</th>
+        <th>EndsAtUtc</th>
+        <th>SortOrder</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (item of items; track item.id) {
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.title }}</td>
+          <!-- <td>{{ item.imageUrl }}</td> -->
+          <!-- <td>{{ item.targetUrl }}</td> -->
+          <td>
+            <input type="checkbox" [checked]="item.isActive" (change)="onToggleStatus(item)" />
+          </td>
+          <td>{{ item.startsAtUtc ? item.startsAtUtc : 'unknown' }}</td>
+          <td>{{ item.endsAtUtc ? item.endsAtUtc : 'unknown' }}</td>
+          <td>{{ item.sortOrder }}</td>
+          <td>
+            <button (click)="onEdit(item.id)">Edit</button>
+            <button (click)="onDelete(item)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+<app-fit-paginator-bar [vm]="this"></app-fit-paginator-bar>

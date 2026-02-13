@@ -1,0 +1,197 @@
+<div class="container">
+  <!-- Header Card -->
+  <div class="header-card">
+    <div class="header-card-content">
+      <!-- Left: Title with Icon -->
+      <div class="title-section">
+        <button mat-icon-button (click)="onCancel()" class="back-btn">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="title-icon">
+          <mat-icon>edit</mat-icon>
+        </div>
+        <div>
+          <h1>Uredi Narudžbu</h1>
+          <p class="subtitle" *ngIf="order">{{ order.referenceNumber }}</p>
+        </div>
+      </div>
+
+      <!-- Right: Actions -->
+      <div class="actions-container">
+        <button mat-button (click)="onCancel()" [disabled]="isSaving">
+          <mat-icon>close</mat-icon>
+          <span>Odustani</span>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onSubmit()"
+          [disabled]="form.invalid || isSaving || isLoading"
+        >
+          <mat-spinner *ngIf="isSaving" diameter="20"></mat-spinner>
+          <mat-icon *ngIf="!isSaving">save</mat-icon>
+          <span>Sačuvaj</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="48" color="primary"></mat-spinner>
+    <p>Učitavanje narudžbe...</p>
+  </div>
+
+  <!-- Form Content -->
+  <div class="form-content" *ngIf="!isLoading && form">
+    <form [formGroup]="form">
+      <!-- Order Note -->
+      <mat-card class="section-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>notes</mat-icon>
+            Napomena
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Napomena (opciono)</mat-label>
+            <textarea
+              matInput
+              formControlName="note"
+              rows="3"
+              placeholder="Unesite napomenu za narudžbu..."
+            ></textarea>
+            <mat-icon matSuffix>description</mat-icon>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Order Items -->
+      <mat-card class="section-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>shopping_cart</mat-icon>
+            Stavke Narudžbe
+          </mat-card-title>
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="addItem()"
+            [disabled]="isLoadingProducts"
+            class="add-item-btn"
+          >
+            <mat-icon>add</mat-icon>
+            Dodaj Stavku
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <!-- Items Array -->
+          <div formArrayName="items" class="items-container">
+            <div
+              *ngFor="let itemGroup of items.controls; let i = index"
+              [formGroupName]="i"
+              class="item-row"
+            >
+              <div class="item-row-header">
+                <span class="item-number">Stavka #{{ i + 1 }}</span>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  type="button"
+                  (click)="removeItem(i)"
+                  matTooltip="Obriši stavku"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+
+              <div class="item-row-content">
+                <!-- Product Selection -->
+                <mat-form-field appearance="outline" class="item-field product-field">
+                  <mat-label>Proizvod</mat-label>
+                  <mat-select formControlName="productId" required>
+                    <mat-option
+                      *ngFor="let product of availableProducts"
+                      [value]="product.id"
+                    >
+                      {{ product.name }} - {{ product.price | number: '1.2-2' }} KM
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>inventory_2</mat-icon>
+                  <mat-error *ngIf="itemGroup.get('productId')?.invalid">
+                    Proizvod je obavezan
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Quantity -->
+                <mat-form-field appearance="outline" class="item-field quantity-field">
+                  <mat-label>Količina</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    formControlName="quantity"
+                    min="1"
+                    required
+                  />
+                  <mat-icon matSuffix>tag</mat-icon>
+                  <mat-error *ngIf="itemGroup.get('quantity')?.invalid">
+                    Minimalno 1
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Unit Price (Readonly) -->
+                <mat-form-field appearance="outline" class="item-field price-field">
+                  <mat-label>Jedinična Cijena</mat-label>
+                  <input matInput type="number" formControlName="unitPrice" readonly />
+                  <span matSuffix>KM</span>
+                </mat-form-field>
+
+                <!-- Subtotal (Readonly) -->
+                <mat-form-field appearance="outline" class="item-field price-field">
+                  <mat-label>Subtotal</mat-label>
+                  <input matInput type="number" formControlName="subtotal" readonly />
+                  <span matSuffix>KM</span>
+                </mat-form-field>
+
+                <!-- Total (Readonly) -->
+                <mat-form-field appearance="outline" class="item-field price-field">
+                  <mat-label>Total (sa popustom)</mat-label>
+                  <input matInput type="number" formControlName="total" readonly />
+                  <span matSuffix>KM</span>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- No Items Message -->
+            <div *ngIf="items.length === 0" class="no-items">
+              <mat-icon>inbox</mat-icon>
+              <p>Nema stavki u narudžbi. Kliknite "Dodaj Stavku" da dodate proizvode.</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Order Summary -->
+      <mat-card class="section-card summary-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>calculate</mat-icon>
+            Ukupno
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="summary-row">
+            <span class="summary-label">Ukupan iznos:</span>
+            <span class="summary-value">{{ getOrderTotal() | number: '1.2-2' }} KM</span>
+          </div>
+          <div class="summary-info">
+            <mat-icon>info</mat-icon>
+            <span>Sve cijene uključuju 5% popust</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div>
+  <div>
+    <label for="">Search</label>
+    <input type="text" [(ngModel)]="this.request.search" (input)="loadPagedData()" />
+    <button (click)="onCreate()">Add new product</button>
+  </div>
+  <div>
+    <label for="">Only enabled</label>
+    <input type="checkbox" [(ngModel)]="this.request.onlyEnabled" (change)="loadPagedData()" />
+  </div>
+</div>
+
+@if (isLoading) {
+  <p>Loading...</p>
+} @else if (totalItems === 0) {
+  <p>No items..</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Stock quantity</th>
+        <th>Category Name</th>
+        <th>Is enabled</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of items; track $index) {
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.stockQuantity }}</td>
+          <td>{{ item.categoryName }}</td>
+          <td>
+            <input type="checkbox" [checked]="item.isEnabled" (change)="onToggleStatus(item)" />
+          </td>
+          <td>
+            <button (click)="onDelete(item)">Obriši</button>
+            <button (click)="onEdit(item.id)">Uredi</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+<app-fit-paginator-bar [vm]="this"></app-fit-paginator-bar>

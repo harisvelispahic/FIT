@@ -1,0 +1,62 @@
+@if (isEditMode) {
+  <h1>Edit the product:</h1>
+} @else {
+  <h1>Add new product:</h1>
+}
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="">Name</label>
+    <input type="text" formControlName="name" />
+  </div>
+
+  <div>
+    <label for="">Description</label>
+    <input type="text" formControlName="description" />
+  </div>
+
+  <div>
+    <label for="">Price</label>
+    <input type="number" formControlName="price" />
+  </div>
+
+  <div>
+    <label for="">stockQuantity</label>
+    <input type="number" formControlName="stockQuantity" />
+  </div>
+
+  <div>
+    <label for="">Is enabled</label>
+    <input type="checkbox" formControlName="isEnabled" />
+  </div>
+
+  <div>
+    <label for="">Product category</label>
+    <select formControlName="categoryId">
+      @for (cat of categories; track $index) {
+        <option [value]="cat.id">{{ cat.name }}</option>
+      }
+    </select>
+  </div>
+
+  @if (this.form.get('name')?.invalid && this.form.get('name')?.touched) {
+    <p>Name: {{ getErrorMessage('name') }}</p>
+  }
+  @if (this.form.get('description')?.invalid && this.form.get('name')?.touched) {
+    <p>description: {{ getErrorMessage('description') }}</p>
+  }
+  @if (this.form.get('price')?.invalid && this.form.get('name')?.touched) {
+    <p>price: {{ getErrorMessage('price') }}</p>
+  }
+  @if (this.form.get('stockQuantity')?.invalid && this.form.get('name')?.touched) {
+    <p>stockQuantity: {{ getErrorMessage('stockQuantity') }}</p>
+  }
+  @if (this.form.get('categoryId')?.invalid && this.form.get('name')?.touched) {
+    <p>Category: {{ getErrorMessage('categoryId') }}</p>
+  }
+
+  <div>
+    <button type="submit" [disabled]="this.form.invalid">Submit</button>
+    <button type="button" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

@@ -1,0 +1,186 @@
+<!-- Landing Page Content (existing marketing sections) -->
+<div class="landing-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="logo-container">
+          <mat-icon class="logo-icon">storefront</mat-icon>
+          <h1 class="brand-name">FIT Market</h1>
+        </div>
+        <h2 class="hero-title">Moderna platforma za upravljanje marketom</h2>
+        <p class="hero-description">
+          Pojednostavite vaše poslovanje sa našim intuitivnim sistemom za upravljanje proizvodima,
+          kategorijama i zalihama. Sve što vam treba na jednom mjestu.
+        </p>
+        <div class="hero-actions">
+          <button mat-raised-button color="primary" class="cta-button" routerLink="/auth/login">
+            <mat-icon>rocket_launch</mat-icon>
+            Započni sada
+          </button>
+          <button mat-stroked-button class="secondary-button" (click)="scrollToProducts()">
+            <mat-icon>shopping_bag</mat-icon>
+            Pregledaj proizvode
+          </button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="floating-card card-1">
+          <mat-icon>inventory_2</mat-icon>
+          <span>{{ catalogHome?.stats?.totalProducts || 0 }}+ Proizvoda</span>
+        </div>
+        <div class="floating-card card-2">
+          <mat-icon>category</mat-icon>
+          <span>{{ catalogHome?.stats?.totalCategories || 0 }} Kategorija</span>
+        </div>
+        <div class="floating-card card-3">
+          <mat-icon>speed</mat-icon>
+          <span>Brzo & Efikasno</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Loading State -->
+  <section *ngIf="loading" class="loading-section">
+    <mat-spinner diameter="60"></mat-spinner>
+    <p>Učitavanje kataloga...</p>
+  </section>
+
+  <!-- Error State -->
+  <section *ngIf="error && !loading" class="error-section">
+    <mat-icon color="warn">error_outline</mat-icon>
+    <p>Greška pri učitavanju kataloga</p>
+    <button mat-raised-button color="primary" (click)="loadCatalogHome()">
+      <mat-icon>refresh</mat-icon>
+      Pokušaj ponovo
+    </button>
+  </section>
+
+  <!-- Catalog Content (only if loaded successfully) -->
+  <ng-container *ngIf="catalogHome && !loading">
+    <!-- Promotions Section -->
+    <section class="promotions-section" *ngIf="catalogHome.promotions.length > 0" id="products">
+      <div class="section-header">
+        <h2 class="section-title">Akcijske ponude</h2>
+      </div>
+
+      <!-- Main Promotion Banner -->
+      <div class="main-promotion" *ngIf="catalogHome.promotions[0]">
+        <div class="promo-banner mat-elevation-z4"
+             [style.background-image]="'linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url(' + catalogHome.promotions[0].imageUrl + ')'">
+          <div class="promo-content">
+            <h3>{{ catalogHome.promotions[0].title }}</h3>
+            <button mat-raised-button color="accent" *ngIf="catalogHome.promotions[0].targetUrl"
+                    [routerLink]="catalogHome.promotions[0].targetUrl">
+              Saznaj više
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Promotions Row -->
+      <div class="promotions-row" *ngIf="catalogHome.promotions.length > 1">
+        <div class="promo-card mat-elevation-z2" *ngFor="let promo of catalogHome.promotions.slice(1)"
+             [style.background-image]="'linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url(' + promo.imageUrl + ')'">
+          <div class="promo-mini-content">
+            <h4>{{ promo.title }}</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section" *ngIf="catalogHome.categories.length > 0">
+      <div class="section-header">
+        <h2 class="section-title">Kategorije proizvoda</h2>
+      </div>
+
+      <div class="categories-grid">
+        <div class="category-card mat-elevation-z2" *ngFor="let category of catalogHome.categories">
+          <mat-icon>category</mat-icon>
+          <h3>{{ category.name }}</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newest Products Section -->
+    <section class="products-section" *ngIf="catalogHome.newestProducts.length > 0">
+      <div class="section-header">
+        <h2 class="section-title">Najnoviji proizvodi</h2>
+        <p class="section-subtitle">
+          Pogledajte naš najnoviji asortiman po najboljim cijenama
+        </p>
+      </div>
+
+      <div class="products-grid">
+        <mat-card class="product-card" *ngFor="let product of catalogHome.newestProducts">
+          <mat-card-header>
+            <mat-card-title>{{ product.name }}</mat-card-title>
+            <mat-card-subtitle>{{ product.categoryName }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="product-image-placeholder">
+              <mat-icon>inventory_2</mat-icon>
+            </div>
+            <p class="product-description" *ngIf="product.description">
+              {{ product.description }}
+            </p>
+            <div class="product-price">
+              {{ product.price | currency:'BAM' }}
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="addToCart(product)">
+              <mat-icon>add_shopping_cart</mat-icon>
+              Dodaj u korpu
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </section>
+  </ng-container>
+
+  <!-- Stats Section (existing marketing content) -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <mat-icon class="stat-icon">groups</mat-icon>
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Aktivnih korisnika</div>
+      </div>
+
+      <div class="stat-card">
+        <mat-icon class="stat-icon">shopping_cart</mat-icon>
+        <div class="stat-number">{{ catalogHome?.stats?.totalProducts || '10,000+' }}</div>
+        <div class="stat-label">Proizvoda u sistemu</div>
+      </div>
+
+      <div class="stat-card">
+        <mat-icon class="stat-icon">schedule</mat-icon>
+        <div class="stat-number">99.9%</div>
+        <div class="stat-label">Uptime garancija</div>
+      </div>
+
+      <div class="stat-card">
+        <mat-icon class="stat-icon">star</mat-icon>
+        <div class="stat-number">4.9/5</div>
+        <div class="stat-label">Prosječna ocjena</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section (existing marketing content) -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Spremni da počnete?</h2>
+      <p>Pridružite se stotinama zadovoljnih korisnika koji su već unaprijedili svoje poslovanje</p>
+      <button mat-raised-button color="primary" class="cta-large-button" routerLink="/auth/login">
+        <mat-icon>login</mat-icon>
+        Prijavite se sada
+      </button>
+    </div>
+  </section>
+</div>

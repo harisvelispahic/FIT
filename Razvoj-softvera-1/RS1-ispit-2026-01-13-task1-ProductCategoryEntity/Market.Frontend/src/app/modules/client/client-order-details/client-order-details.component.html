@@ -1,0 +1,142 @@
+<div class="order-details-page">
+  <div class="details-container">
+    <!-- Back Button -->
+    <button mat-button class="back-button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Nazad na narudžbe
+    </button>
+
+    <!-- Loading State -->
+    <div class="loading-state" *ngIf="loading">
+      <mat-spinner diameter="60"></mat-spinner>
+      <p>Učitavanje detalja...</p>
+    </div>
+
+    <!-- Error State -->
+    <div class="error-state" *ngIf="error && !loading">
+      <mat-icon color="warn">error_outline</mat-icon>
+      <p>Greška pri učitavanju detalja narudžbe</p>
+      <button mat-raised-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Nazad
+      </button>
+    </div>
+
+    <!-- Order Details -->
+    <div class="order-content" *ngIf="order && !loading">
+      <!-- Header Card -->
+      <mat-card class="header-card">
+        <mat-card-header>
+          <mat-card-title>
+            <div class="title-row">
+              <span class="order-reference">Narudžba {{ order.referenceNumber || 'N/A' }}</span>
+              <span class="status-badge" [ngClass]="getStatusClass(order.status)">
+                {{ getStatusLabel(order.status) }}
+              </span>
+            </div>
+          </mat-card-title>
+          <mat-card-subtitle>
+            Kreirano: {{ formatDate(order.orderedAtUtc) }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="info-grid">
+            <!-- Customer Info -->
+            <div class="info-section">
+              <h3>
+                <mat-icon>person</mat-icon>
+                Podaci kupca
+              </h3>
+              <div class="info-item">
+                <span class="label">Ime:</span>
+                <span class="value">{{ order.user.userFirstname }} {{ order.user.userLastname }}</span>
+              </div>
+              <div class="info-item" *ngIf="order.user.userAddress">
+                <span class="label">Adresa:</span>
+                <span class="value">{{ order.user.userAddress }}</span>
+              </div>
+              <div class="info-item" *ngIf="order.user.userCity">
+                <span class="label">Grad:</span>
+                <span class="value">{{ order.user.userCity }}</span>
+              </div>
+            </div>
+
+            <!-- Order Info -->
+            <div class="info-section">
+              <h3>
+                <mat-icon>info</mat-icon>
+                Informacije o narudžbi
+              </h3>
+              <div class="info-item">
+                <span class="label">Broj narudžbe:</span>
+                <span class="value">{{ order.referenceNumber || 'N/A' }}</span>
+              </div>
+              <div class="info-item" *ngIf="order.paidAtUtc">
+                <span class="label">Plaćeno:</span>
+                <span class="value">{{ formatDate(order.paidAtUtc) }}</span>
+              </div>
+              <div class="info-item" *ngIf="order.note">
+                <span class="label">Napomena:</span>
+                <span class="value note-text">{{ order.note }}</span>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Items Card -->
+      <mat-card class="items-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>shopping_bag</mat-icon>
+            Stavke narudžbe
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="items-table">
+            <div class="table-header">
+              <div class="col-product">Proizvod</div>
+              <div class="col-price">Cijena</div>
+              <div class="col-qty">Količina</div>
+              <div class="col-discount">Popust</div>
+              <div class="col-total">Ukupno</div>
+            </div>
+
+            <div class="table-row" *ngFor="let item of order.items">
+              <div class="col-product">
+                <div class="product-info">
+                  <div class="product-icon">
+                    <mat-icon>inventory_2</mat-icon>
+                  </div>
+                  <div class="product-details">
+                    <span class="product-name">{{ item.product.productName }}</span>
+                    <span class="product-category">{{ item.product.productCategoryName }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-price">{{ item.unitPrice | currency:'BAM' }}</div>
+              <div class="col-qty">{{ item.quantity }}</div>
+              <div class="col-discount">
+                <span *ngIf="item.discountPercent > 0">
+                  {{ item.discountPercent }}% ({{ item.discountAmount | currency:'BAM' }})
+                </span>
+                <span *ngIf="item.discountPercent === 0">-</span>
+              </div>
+              <div class="col-total">{{ item.total | currency:'BAM' }}</div>
+            </div>
+
+            <!-- Summary -->
+            <div class="table-footer">
+              <div class="summary-row">
+                <span class="summary-label">Ukupno:</span>
+                <span class="summary-value">{{ order.totalAmount | currency:'BAM' }}</span>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

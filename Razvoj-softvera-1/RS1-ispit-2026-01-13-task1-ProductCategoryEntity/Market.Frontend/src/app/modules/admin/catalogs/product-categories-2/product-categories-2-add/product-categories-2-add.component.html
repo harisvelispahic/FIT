@@ -1,0 +1,14 @@
+<p>Add a new product category below:</p>
+<form [formGroup]="form">
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" formControlName="name" />
+  </div>
+  <div>
+    <label for="active">Active</label>
+    <input type="checkbox" id="active" formControlName="isEnabled" />
+  </div>
+
+  <button type="submit" (click)="createCategory()" [disabled]="form.invalid">Save</button>
+  <button type="button" (click)="cancel()">Cancel</button>
+</form>

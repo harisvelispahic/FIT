@@ -1,0 +1,33 @@
+﻿using Market.Domain.Entities.Sales;
+
+namespace Market.Application.Modules.Catalog.Promotions.Queries.GetById;
+
+public sealed class GetPromotionByIdQueryDto
+{
+    public required int Id { get; set; }
+    public required string Title { get; set; }
+    public required string ImageUrl { get; set; }
+    public required string? TargetUrl { get; set; }
+    public required bool IsActive { get; set; }
+    public required DateTime? StartsAtUtc { get; set; }
+    public required DateTime? EndsAtUtc { get; set; }
+    public required int SortOrder { get; set; }
+
+    public required List<GetByIdPromotionQueryDtoPromotionItem> PromotionItems { get; set; } = [];
+
+}
+public sealed class GetByIdPromotionQueryDtoPromotionItem
+{
+    public required int Id { get; set; }
+    public required int ProductId { get; set; }
+    public required GetByIdPromotionQueryDtoProduct? Product { get; set; }
+    public required decimal DiscountPercent { get; set; }
+}
+
+public class GetByIdPromotionQueryDtoProduct
+{
+    public required int ProductId { get; set; }
+    public required string ProductName { get; set; }
+    public required string ProductCategoryName { get; set; }
+
+}

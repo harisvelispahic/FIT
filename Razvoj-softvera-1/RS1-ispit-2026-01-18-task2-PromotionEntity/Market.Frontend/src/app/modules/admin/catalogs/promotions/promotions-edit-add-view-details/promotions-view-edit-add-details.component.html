@@ -1,0 +1,88 @@
+@if (mode === 'add') {
+  <h1>Create new promotion</h1>
+} @else if (mode === 'edit') {
+  <h1>Edit the promotion</h1>
+} @else {
+  <h1>Promotion details</h1>
+}
+
+<form [formGroup]="form" (submit)="onSubmit()">
+  <!-- Parent fields -->
+  <div>
+    <label>Title:</label>
+    <input formControlName="title" />
+  </div>
+  <div>
+    <label>Image URL:</label>
+    <input formControlName="imageUrl" />
+  </div>
+  <div>
+    <label>Target URL:</label>
+    <input formControlName="targetUrl" />
+  </div>
+  <div>
+    <label>Is Active:</label>
+    <input type="checkbox" formControlName="isActive" />
+  </div>
+  <div>
+    <label>Starts At:</label>
+    <input type="datetime-local" formControlName="startsAtUtc" />
+  </div>
+  <div>
+    <label>Ends At:</label>
+    <input type="datetime-local" formControlName="endsAtUtc" />
+  </div>
+  <div>
+    <label>Sort Order:</label>
+    <input type="number" formControlName="sortOrder" />
+  </div>
+
+  <!-- Child FormArray -->
+  <div formArrayName="promotionItems">
+    @for (item of promotionItems.controls; track $index) {
+      <!-- <div *ngFor="let item of promotionItems.controls; let i = index" [formGroupName]="i"> -->
+      <div [formGroupName]="$index">
+        <h4>Promotion Item {{ $index + 1 }}</h4>
+        <!-- <div>
+        <label>Product ID:</label>
+        <input formControlName="productId" />
+      </div> -->
+        <!-- <div>
+        <label>Product Name:</label>
+        <input formControlName="productName" />
+      </div> -->
+        <div>
+          <label>Product:</label>
+          <select name="" id="" formControlName="productId">
+            @for (product of products; track $index) {
+              <option [value]="product.id">{{ product.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div>
+          <label>Discount Percent:</label>
+          <input type="number" formControlName="discountPercent" />
+        </div>
+        <!-- Remove button -->
+        <!-- Remove button (only in add/edit mode) -->
+        @if (mode !== 'view') {
+          <button type="button" (click)="removePromotionItem($index)">Remove</button>
+        }
+      </div>
+    }
+  </div>
+  <!-- Add button -->
+  <!-- <button type="button" (click)="addPromotionItem()">Add Promotion Item</button> -->
+  @if (mode !== 'view') {
+    <div>
+      <button type="button" (click)="addPromotionItem()">Add Promotion Item</button>
+    </div>
+  }
+  <div>
+    @if (mode !== 'view') {
+      <button type="submit" [disabled]="this.form.invalid">Submit</button>
+    }
+    <button routerLink="/admin/promotions">Go back</button>
+  </div>
+</form>

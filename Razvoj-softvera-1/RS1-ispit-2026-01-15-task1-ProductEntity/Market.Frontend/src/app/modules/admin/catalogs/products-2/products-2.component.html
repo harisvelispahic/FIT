@@ -1,0 +1,39 @@
+<label for="search">Search</label>
+<input type="text" id="search" [(ngModel)]="request.search" (input)="searchAction()" />
+<button (click)="addNewProduct()">Add new product</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Stock</th>
+      <th>Active</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for(item of items; track $index){
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.categoryName }}</td>
+      <td>{{ item.price }}</td>
+      <td>{{ item.stockQuantity }}</td>
+      <td>
+        <input type="checkbox" [checked]="item.isEnabled" disabled />
+      </td>
+      <td>
+        <button (click)="editProduct(item.id)">Edit</button>
+        <button (click)="onDelete(item)">Delete</button>
+      </td>
+    </tr>
+
+    }
+  </tbody>
+</table>
+
+<app-fit-paginator-bar [vm]="this"></app-fit-paginator-bar>

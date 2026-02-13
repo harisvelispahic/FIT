@@ -1,0 +1,53 @@
+<input
+  type="text"
+  placeholder="Search categories..."
+  [(ngModel)]="searchTerm"
+  (change)="searchCategories()"
+/>
+<button routerLink="add">Add new category</button>
+
+<div>
+  <label for="onlyAvailable">Only available categories?</label>
+  <input
+    type="checkbox"
+    id="onlyAvailable"
+    [(ngModel)]="onlyAvailable"
+    (change)="searchCategories()"
+  />
+</div>
+
+@if (isLoading) {
+<p>Loading...</p>
+} @else if (totalItems === 0) {
+<p>No product categories found.</p>
+} @else {
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Active</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(item of items; track $index){
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+      <td>
+        <input type="checkbox" [checked]="item.isEnabled" />
+      </td>
+      <td>
+        <button routerLink="edit/{{ item.id }}">Edit</button>
+        <button (click)="onDelete(item)">Delete</button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+<app-fit-paginator-bar [vm]="this"></app-fit-paginator-bar>
+
+}

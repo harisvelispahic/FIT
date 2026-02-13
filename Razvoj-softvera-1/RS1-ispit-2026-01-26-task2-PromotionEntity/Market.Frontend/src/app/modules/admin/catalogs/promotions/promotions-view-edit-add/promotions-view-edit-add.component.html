@@ -1,0 +1,76 @@
+@if (mode === 'edit') {
+  <h1>Edit promotion:</h1>
+} @else if (mode === 'add') {
+  <h1>Add promotion:</h1>
+} @else if (mode === 'view') {
+  <h1>Promotion details:</h1>
+}
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Title</label>
+    <input type="text" formControlName="title" />
+  </div>
+
+  <div>
+    <label>imageUrl</label>
+    <input type="text" formControlName="imageUrl" />
+  </div>
+
+  <div>
+    <label>targetUrl</label>
+    <input type="text" formControlName="targetUrl" />
+  </div>
+
+  <div>
+    <label>isActive</label>
+    <input type="checkbox" formControlName="isActive" />
+  </div>
+
+  <div>
+    <label>startsAtUtc</label>
+    <input type="datetime-local" formControlName="startsAtUtc" />
+  </div>
+
+  <div>
+    <label>endsAtUtc</label>
+    <input type="datetime-local" formControlName="endsAtUtc" />
+  </div>
+
+  <div>
+    <label>sortOrder</label>
+    <input type="number" formControlName="sortOrder" />
+  </div>
+
+  <div formArrayName="promotionItems">
+    @for (item of promotionItems.controls; track $index; let i = $index) {
+      <div [formGroupName]="$index">
+        <h3>Promotion item {{ i + 1 }}</h3>
+        <div>
+          <label>Product</label>
+          <select formControlName="productId">
+            @for (product of this.products; track $index; let j = $index) {
+              <option [value]="product.id">{{ product.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div>
+          <label>Discount percentage</label>
+          <input type="number" formControlName="discountPercent" />
+        </div>
+      </div>
+
+      <button (click)="removeItem(i)">Remove product</button>
+    }
+  </div>
+  @if (this.mode !== 'view') {
+    <button (click)="addItem()">Add product</button>
+  }
+  <div>
+    @if (this.mode !== 'view') {
+      <button type="submit" [disabled]="form.invalid">Submit</button>
+    }
+    <button type="button" (click)="onCancel()">Go back</button>
+  </div>
+</form>
