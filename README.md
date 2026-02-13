@@ -38,10 +38,20 @@ The projects in this repository align with the curriculum and cover the followin
   - **C++**: Programming I & II
   - **JavaScript**: Web development projects
 
-- **Third Semester** (current)
+- **Third Semester**
   - **C#**: Programming III
   - **C++**: Data Structures and Algorithms
 
+- **Fourth Semester**
+
+  - **SQL**: Databases II
+  - **C#**: Computer Graphics
+
+- **Fifth Semester** (current)
+  - **C# / .NET**: Software Development
+  - **Angular / TypeScript**: Software Development
+  - **C++**: Internet of Things
+  - **React**: Internet of Things
 ---
 
 ## Repository Structure
@@ -54,7 +64,10 @@ The repository is organized into folders by subject and semester:
   - Includes Programming II (C++) and development projects using JavaScript.
 - `Semester_3/`
   - Focused on Programming III (C#) and Data Structures and Algorithms (C++).
-
+- `Semester_4/`
+  - Covers Databases II (SQL) and Computer Graphics (C#).
+- `Semester_5/`
+  - Includes Software Development (C# / .NET, Angular / TypeScript) and Internet of Things (C++, React).
 ---
 
 ## Acknowledgments
